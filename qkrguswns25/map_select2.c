@@ -25,12 +25,9 @@ void map_type()
 	gotoxy(36,26);
 	printf("¸Ê 3");
 }
-void print_map(int menu) //¸Ê Ãâ·Â
+void print_map() //¸Ê Ãâ·Â
 {
 	int i,j;
-	if(menu==0) map=map1();
-	else if(menu==1) map=map2();
-	else if(menu==2) map=map3();
 
 	for(i=0;i<SERO;i++)
 	{
@@ -56,20 +53,25 @@ void print_status()
 }
 int map_select()
 {
-	int menu=-1,key,choice=0;
+	int menu=0,key;
 	while(1) // ¸Ê ¼±ÅÃ 
 	{
 		if(kbhit())
 		{
 			key = getch();
 			if(key == UP)
-				menu-=1;
+			{
+				menu = menu? menu-1 : 2;
+			}
 			else if(key == DOWN)
-				menu+=1;
+			{
+				menu = (menu + 1) % 3;
+			}
 			else if(key == SPACE || key == ENTER)
-				choice=1;
-
-			if((menu+100)%3==0)
+			{
+				return menu + 1;
+			}
+			if(menu == 0)
 			{
 				gotoxy(33,26);
 				printf("  ");
@@ -84,7 +86,7 @@ int map_select()
 				gotoxy(41,20);
 				printf("¢Â");
 			}
-			else if((menu+100)%3==1)
+			else if(menu == 1)
 			{
 				gotoxy(33,20);
 				printf("  ");
@@ -99,7 +101,7 @@ int map_select()
 				gotoxy(41,23);
 				printf("¢Â");
 			}
-			else if((menu+100)%3==2)
+			else if(menu == 2)
 			{
 				gotoxy(33,20);
 				printf("  ");
@@ -114,19 +116,6 @@ int map_select()
 				gotoxy(41,26);
 				printf("¢Â");
 			}
-			if(menu==0 && choice==1) // ¸Ê ½ÇÇà
-			{
-				return 1;
-			}
-			else if(menu==1 && choice==1)
-			{
-				return 2;
-			}
-			else if(menu==2 && choice==1)
-			{
-				return 3;
-			}
-
 		}
 
 	}
