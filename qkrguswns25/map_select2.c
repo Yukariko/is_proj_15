@@ -1,17 +1,105 @@
 #include <stdio.h>
+#include <conio.h>
+#include <windows.h>
+#include <time.h>
+#define LEFT 75
+#define RIGHT 77
+#define UP 72
+#define DOWN 80
+#define SPACE 32
+#define ENTER 13
+#define SERO 24
+#define GARO 50
+
+void gotoxy(int x, int y)
+{
+	COORD Pos = { x-1, y-1 };
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
+}
+void map_type() //?? ????
+{
+	gotoxy(26,26);
+	printf("¸Ê 1");
+	gotoxy(36,26);
+	printf("¸Ê 2"); 
+	gotoxy(46,26);
+	printf("¸Ê 3");
+}
+int map_select() // ?? ????
+{
+	int menu=0,key;
+	while(1)  
+	{
+		if(kbhit())
+		{
+			key = getch();
+			if(key == LEFT)
+			{
+				menu = menu? menu-1 : 2;
+			}
+			else if(key == RIGHT)
+			{
+				menu = (menu + 1) % 3;
+			}
+			else if(key == SPACE || key == ENTER)
+			{
+				return menu + 1;
+			}
+			if(menu == 0)
+			{
+				gotoxy(33,26);
+				printf("  ");
+				gotoxy(43,26);
+				printf("  ");
+				gotoxy(23,26);
+				printf("¢Â");
+				gotoxy(41,26);
+				printf("  ");
+				gotoxy(51,26);
+				printf("  ");
+				gotoxy(31,26);
+				printf("¢Â");
+			}
+			else if(menu == 1)
+			{
+				gotoxy(23,26);
+				printf("  ");
+				gotoxy(43,26);
+				printf("  ");
+				gotoxy(33,26);
+				printf("¢Â");
+				gotoxy(31,26);
+				printf("  ");
+				gotoxy(51,26);
+				printf("  ");
+				gotoxy(41,26);
+				printf("¢Â");
+			}
+			else if(menu == 2)
+			{
+				gotoxy(23,26);
+				printf("  ");
+				gotoxy(33,26);
+				printf("  ");
+				gotoxy(43,26);
+				printf("¢Â");
+				gotoxy(31,26);
+				printf("  ");
+				gotoxy(41,26);
+				printf("  ");
+				gotoxy(51,26);
+				printf("¢Â");
+			}
+		}
+
+	}
+}
+
 int main()
 {
-     int i,n,sum=0,c=0;
-     scanf("%d",&n);
-     for(i=n;i>=1;i--)
-     {
-        if(n%i==0)
-          {
-             printf("%d ",i);
-              sum+=i;
-               c++;
-           }
-       }
-         printf("%d ",c);
-         printf("%d",sum);
+	map_type();
+	map_select();
+	return 0;
 }
+
+
