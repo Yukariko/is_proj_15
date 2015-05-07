@@ -1,7 +1,23 @@
-시작화면
+시작화면 - 주미
 
-맵선택
+맵선택 - 현준
 
 게임하는중
 
-끝나는화면
+init()
+
+game_start() - 인수
+	print_map() - 현준
+	print_status() - 현준
+	
+
+	키-입력,함수 호출
+	
+	move(player_num,udrl)
+	shoot()
+	
+	move_bullet()
+
+
+
+끝나는화면 - 주미
