@@ -16,6 +16,32 @@ void gotoxy(int x, int y)
 	COORD Pos = { x-1, y-1 };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
 }
+void print_map() //맵 출력
+{
+	int i,j;
+
+	for(i=0;i<SERO;i++)
+	{
+		for(j=0;j<GARO;j++)
+		{
+			printf("%c",map[SERO][GARO]);
+		}
+	}
+}
+void print_status() //상태 출력
+{
+	int i,j;
+	gotoxy(60,1);
+	printf("1P");
+	gotoxy(60,2);
+	for(i=0;i<one_blood();i++)
+		printf("♥");
+	gotoxy(60,10);
+	printf("2P");
+	gotoxy(60,11);
+	for(j=0;j<two_blood();j++)
+		printf("♥");
+}
 void map_type() //맵 선택
 {
 	gotoxy(26,26);
