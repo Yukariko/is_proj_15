@@ -8,6 +8,8 @@
 #define DOWN 80
 #define SPACE 32
 #define ENTER 13
+#define SERO 24
+#define GARO 50
 
 void gotoxy(int x, int y)
 {
@@ -22,6 +24,35 @@ void map_type()
 	printf("¸Ê 2"); 
 	gotoxy(36,26);
 	printf("¸Ê 3");
+}
+void print_map(int menu) //¸Ê Ãâ·Â
+{
+	int i,j;
+	if(menu==0) map=map1();
+	else if(menu==1) map=map2();
+	else if(menu==2) map=map3();
+
+	for(i=0;i<SERO;i++)
+	{
+		for(j=0;j<GARO;j++)
+		{
+			printf("%c",map[SERO][GARO]);
+		}
+	}
+}
+void print_status()
+{
+	int i,j;
+	gotoxy(60,1);
+	printf("1P");
+	gotoxy(60,2);
+	for(i=0;i<one_blood();i++)
+		printf("¢¾");
+	gotoxy(60,10);
+	printf("2P");
+	gotoxy(60,11);
+	for(j=0;j<two_blood();j++)
+		printf("¢¾");
 }
 int map_select()
 {
@@ -85,24 +116,25 @@ int map_select()
 			}
 			if(menu==0 && choice==1) // ¸Ê ½ÇÇà
 			{
-				return 0;	
+				print_map(0);
 			}
 			else if(menu==1 && choice==1)
 			{
-				return 0;
+				print_map(1);
 			}
 			else if(menu==2 && choice==1)
 			{
-				return 0;
+				print_map(2);
 			}
 
 		}
 
 	}
 }
+
 int main()
 {
 	map_type();
 	map_select();
-
+	return 0;
 }
