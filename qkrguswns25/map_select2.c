@@ -11,6 +11,8 @@
 #define SERO 24
 #define GARO 50
 
+char map[SERO+1][GARO+1];
+
 void gotoxy(int x, int y)
 {
 	COORD Pos = { x-1, y-1 };
@@ -24,6 +26,37 @@ void map_type() //?? ????
 	printf("¸Ê 2"); 
 	gotoxy(46,26);
 	printf("¸Ê 3");
+}
+
+const char *get_shape(char code)
+{
+	 return "¤±"; 
+}
+
+void print_map(int num)
+{
+	FILE *fp;
+	if(num == 1)
+		fp = fopen("./¸Ê1.txt","r");
+	else if(num == 2)
+		fp = fopen("./¸Ê2.txt","r");
+	else
+		fp = fopen("./¸Ê3.txt","r");
+	
+	for(int i=0;i<SERO;i++)
+		for(int j=0;j<GARO;j++)
+			fscanf("%d",&map[i][j]);
+	fclose(fp);
+	
+	system("cls");					//°ÔÀÓ ½ÃÀÛÀü È­¸é ÃÊ±âÈ­ 
+	
+	for(int i=0;i<SERO;i++)
+	{
+		for(int j=0;j<GARO;j++)
+		{
+			printf("%s",get_shape(map[i][j]));
+		}
+	}
 }
 int map_select() // ?? ????
 {
