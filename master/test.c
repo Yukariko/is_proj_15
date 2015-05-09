@@ -40,16 +40,7 @@ while(1) // 메뉴 키조작
 int main()
 {
 	start();
-	while(1)
-	{
-		int select = map_select();
-		init(select);
-		game_start();
-		if(!game_continue())
-		{
-			break;
-		}
-	}
+	game_start();
 	end();
 	return 0;
 }
