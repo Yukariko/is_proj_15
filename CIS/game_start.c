@@ -12,6 +12,11 @@
 #define GARO 50
 #define HP 5
 #define bullet 50
+#define p2_LEFT 97
+#define p2_RIGHT 100
+#define p2_UP 119
+#define p2_DOWN 115
+
 int gameover;
 
 void gotoxy(int x, int y)
@@ -20,14 +25,27 @@ void gotoxy(int x, int y)
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
 }
 
+struct player
+{
+	int bullet_count;
+	int heart;
+	int x,y;
+};
+
+
 void game_start()
 {
 	system("cls");					//게임 시작전 화면 초기화 
 	
-	one_blood(HP);                    //이 함수들이 필요한 것인가? 필요하면 어떤식으로 작석을 해야할 것인가 
-	one_bullet(bullet);
-	two_bllod(HP);
-	two_bullet(bullet);
+	char c;
+	struct player p1,p2;
+	p1.heart=5;
+	p2.heart=5;
+	printf("%d %d \n",p1.heart,p2.heart);
+	p1.x=10;
+	p1.y=10;
+	p2.x=5;
+	p2.y=5;
 	
 	print_map(map_select());  //현준이 메뉴이동을 리턴값으로 수정 요망  
 	
@@ -38,16 +56,64 @@ void game_start()
 	printf_player();
 	printf_potion();              //시간조건필요  
 	
-	while (kbhit()) {   //키 받기 
-     	c  = getch();
+	while (kbhit()) 
+	{   //키 받기 
+		gotoxy(p1.x,p1.y);
+			printf(" ");
+			gotoxy(p2.x,p2.y);
+			printf(" ");			
+			c=getch();
+			if(c==LEFT)
+			{
+				if(map[x][y]==00) --p1.x;
+				
+			}
+			else if(c==RIGHT)
+			{
+				if(map[x][y]==00) ++p1.x;
+			}
+			else if(c==DOWN)
+			{
+			
+				if(map[x][y]==00) ++p1.y;
+		
+			}
+			else if(c==UP)
+			{
+				if(map[x][y]==00) --p1.y;
+			}
+			////////////////////////////////////////////
+			if(c==p2_LEFT)
+			{
+				if(map[x][y]==00) --p2.x;
+				
+			}
+			else if(c==p2_RIGHT)
+			{
+				if(map[x][y]==00) ++p2.x;
+			}
+			else if(c==p2_DOWN)
+			{
+			
+				if(map[x][y]==00) ++p2.y;
+		
+			}
+			else if(c==p2_UP)
+			{
+				if(map[x][y]==00) --p2.y;
+			}
+		}
+		gotoxy(p1.x,p1.y);
+		printf("●");
+		gotoxy(p2.x,p2.y);
+		printf("○");
      	
      
      
  		}
  	
 	effect_map();  //특수효과가 있는 맵처리에 관한 함수  
- 	if(one_blood() == 0) printf_gameover();
- 	else if (two_blood() == 0) printf_gameover();
+ 
  	
 	}
 	
