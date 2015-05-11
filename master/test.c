@@ -18,6 +18,15 @@
 #define p2_DOWN 115
 #define SERO 16
 #define GARO 24
+#define GROUND 0
+#define BUILDING1 1
+#define BUILDING2 2
+#define BUILDING3 3
+#define BUILDING4 4
+#define GRASS 5
+#define BASE 3
+#define XSI 2
+#define YSI 1
 
 /*
 Sleep(1000); // 1 ÃÊ
@@ -89,7 +98,7 @@ void map_type() //?? ????
 	gotoxy(26,26);
 	printf("¸Ê 1");
 	gotoxy(36,26);
-	printf("¸Ê 2"); 
+	printf("¸Ê 2");
 	gotoxy(46,26);
 	printf("¸Ê 3");
 }
@@ -165,6 +174,24 @@ int map_select() // ?? ????
 	}
 }
 
+const char *get_shape(char code)
+{
+	 if(code==GROUND)
+		return "¢Ë";
+	else if(code>=BUILDING1 && code<=BUILDING4)
+		return "¡à";
+	else if(code==GRASS)
+		return "¢¿";
+}
+
+int get_x(int x)
+{
+	return BASE+x*XSI;
+}
+int get_y(int y)
+{
+	return BASE+y*YSI;
+}
 void print_map(int num)
 {
 	FILE *fp;
@@ -177,7 +204,7 @@ void print_map(int num)
 	
 	for(int i=0;i<SERO;i++)
 		for(int j=0;j<GARO;j++)
-			fscanf(fp, "%d",&map[i][j]);
+			fscanf(fp,"%d",&map[i][j]);
 	fclose(fp);
 	
 	system("cls");					//°ÔÀÓ ½ÃÀÛÀü È­¸é ÃÊ±âÈ­ 
@@ -186,19 +213,10 @@ void print_map(int num)
 	{
 		for(int j=0;j<GARO;j++)
 		{
-			gotoxy(3+j*3,3+i*2);
+			gotoxy(get_x(j),get_y(i) );
 			printf("%s",get_shape(map[i][j]));
 		}
 	}
-}
-const char *get_shape(char code)
-{
-	 if(code==0)
-		return "¢Ë";
-	else if(code>=1 && code<=4)
-		return "¡à";
-	else if(code==5)
-		return "¢¿";
 }
 void game_start()
 {
@@ -219,62 +237,49 @@ void game_start()
 	
 	while (kbhit()) 
 	{   //Å° ¹Þ±â 
-			gotoxy(p1.x,p1.y);
-			printf(" ");
-			gotoxy(p2.x,p2.y);
-			printf(" ");			
+			gotoxy(get_x(p1.x),get_y(p1.y));
+			printf("%s",get_shape(GROUND));
 			c=getch();
 			if(c==UP)
 			{
-				if(map[p1.x-1][p1.y]==00 || map[p1.x-1][p1.y] == 05)
+				if(map[p1.y-1][p1.x]==00 || map[p1.y-1][p1.x] == 05)
 				{
-				 	map[p1.x-1][p1.y]=16;
-					 --p1.x;
+				 	map[p1.y-1][p1.x]=16;
+					 --p1.y;
 				}
 				 	 
 				
 			}
 			else if(c==DOWN)
 			{
-				if(map[p1.x+1][p1.y]==00  || map[p1.x+1][p1.y] == 05)
+				if(map[p1.y+1][p1.x]==00  || map[p1.y+1][p1.x] == 05)
 				{
-				 	map[p1.x+1][p1.y]==16;
-				 	++p1.x;
+				 	map[p1.y+1][p1.x]==16;
+				 	++p1.y;
 				 }
 			}
 			else if(c==RIGHT)
 			{
 			
-				if(map[p1.x][p1.y+1]==00  || map[p1.x][p1.y+1] == 05)
+				if(map[p1.y][p1.x+1]==00  || map[p1.y][p1.x+1] == 05)
 				{
-				 	map[p1.x][p1.y+1]==16;
-					 ++p1.y;
+				 	map[p1.y][p1.x+1]==16;
+					 ++p1.x;
 				}
 			}
 			else if(c==LEFT)
 			{
-				if(map[p1.x][p1.y-1]==00  || map[p1.x][p1.y-1] == 05)
+				if(map[p1.y][p1.x-1]==00  || map[p1.y][p1.x-1] == 05)
 				{
-				 	map[p1.x][p1.y-1]==16;
-					--p1.y;
+				 	map[p1.y][p1.x-1]==16;
+					--p1.x;
 				}
 			}
 
-			gotoxy(p1.x,p1.y);
+			gotoxy(get_x(p1.x),get_y(p1.y));
 			printf("¡Ü");
-			gotoxy(p2.x,p2.y);
-			printf("¡Û");
-     	
-     
-     
  		}
- 	
- 
- 	
 	}
-	
-	
-	
 }
 
 void print_player()

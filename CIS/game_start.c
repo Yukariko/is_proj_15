@@ -54,26 +54,25 @@ void game_start()
 	init();
 	
 	print_map(map_select());  //현준이 메뉴이동을 리턴값으로 수정 요망  
+	print_status();
 	
 	while(1) //개임 시작중  
 	{
-	print_status();
-	print_monster();             //시간조건필요 
-	print_player();
-	print_potion();              //시간조건필요  
+	
+//	print_monster();             //시간조건필요 
 	
 	while (kbhit()) 
 	{   //키 받기 
-		gotoxy(p1.x,p1.y);
+			gotoxy(p1.x,p1.y);
 			printf(" ");
 			gotoxy(p2.x,p2.y);
 			printf(" ");			
 			c=getch();
 			if(c==LEFT)
 			{
-				if(map[x][y]==00 || map[x][y] == 05)
+				if(map[p1.y][p1.x-1]==GROUND || map[p1.y][p1.x-1] == GRASS)
 				{
-				 	map[x][y]=16;
+				 	map[p1.y][p1.x-1]=P1;
 					 --p1.x;
 				}
 				 	 
@@ -140,7 +139,7 @@ void game_start()
 				}
 			}
 		gotoxy(p1.x,p1.y);
-		printf("●");
+		printf("%s",get_shape(P1));
 		gotoxy(p2.x,p2.y);
 		printf("○");
      	
