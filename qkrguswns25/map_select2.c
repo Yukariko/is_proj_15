@@ -47,6 +47,14 @@ const char *get_shape(char code)
 		return "¢¿";
 }
 
+int get_x(int x)
+{
+	return BASE+j*XSI;
+}
+int get_y(int y)
+{
+	return BASE+i*YSI;
+}
 void print_map(int num)
 {
 	FILE *fp;
