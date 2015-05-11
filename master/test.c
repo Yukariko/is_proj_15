@@ -68,7 +68,7 @@ const char *get_shape(char code);
 
 int main()
 {
-	start();
+	//start();
 	game_start();
 	end();
 	return 0;
@@ -97,6 +97,7 @@ void map_type() //?? ????
 int map_select() // ?? ????
 {
 	int menu=0,key;
+	map_type();
 	while(1)  
 	{
 		if(kbhit())
