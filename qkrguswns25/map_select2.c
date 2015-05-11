@@ -8,8 +8,8 @@
 #define DOWN 80
 #define SPACE 32
 #define ENTER 13
-#define SERO 24
-#define GARO 50
+#define SERO 16
+#define GARO 24
 
 char map[SERO+1][GARO+1];
 
@@ -54,7 +54,13 @@ void print_map(int num)
 	{
 		for(int j=0;j<GARO;j++)
 		{
-			printf("%s",get_shape(map[i][j]));
+			if(map[i][j]==0)
+				printf("¢Ë");
+			else if(map[i][j]>=1 && map[i][j]<=4)
+				printf("¡à");
+			else if(map[i][j]==5)
+				printf("¢¿");
+
 		}
 	}
 }
