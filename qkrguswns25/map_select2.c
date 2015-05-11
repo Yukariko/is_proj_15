@@ -31,11 +31,11 @@ void map_type() //?? ????
 const char *get_shape(char code)
 {
 	 if(map[i][j]==0)
-		return ¢Ë;
+		return "¢Ë";
 	else if(map[i][j]>=1 && map[i][j]<=4)
-		return ¡à;
+		return "¡à";
 	else if(map[i][j]==5)
-		return ¢¿;
+		return0 "¢¿";
 }
 
 void print_map(int num)
@@ -59,9 +59,9 @@ void print_map(int num)
 	{
 		for(int j=0;j<GARO;j++)
 		{
+			gotoxy(3+j*3,3+i*2);
 			printf("%s",get_shape(map[i][j]));
 		}
-		printf("\n");
 	}
 }
 int map_select() // ?? ????
