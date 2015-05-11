@@ -65,44 +65,74 @@ void game_start()
 			c=getch();
 			if(c==LEFT)
 			{
-				if(map[x][y]==00) --p1.x;
+				if(map[x][y]==00 || map[x][y] == 05)
+				{
+				 	map[x][y]=16;
+					 --p1.x;
+				}
+				 	 
 				
 			}
 			else if(c==RIGHT)
 			{
-				if(map[x][y]==00) ++p1.x;
+				if(map[x][y]==00  || map[x][y] == 05)
+				{
+				 	map[x][y]==16;
+				 	++p1.x;
+				 }
 			}
 			else if(c==DOWN)
 			{
 			
-				if(map[x][y]==00) ++p1.y;
-		
+				if(map[x][y]==00  || map[x][y] == 05)
+				{
+				 	map[x][y]==16;
+					 ++p1.y;
+				}
 			}
 			else if(c==UP)
 			{
-				if(map[x][y]==00) --p1.y;
+				if(map[x][y]==00  || map[x][y] == 05) 
+				{
+				 	map[x][y]==16;
+					--p1.y;
+				}
 			}
 			////////////////////////////////////////////
 			if(c==p2_LEFT)
 			{
-				if(map[x][y]==00) --p2.x;
+				if(map[x][y]==00  || map[x][y] == 05)
+				{
+				 	map[x][y]==17;
+					 --p2.x;
+				}
 				
 			}
 			else if(c==p2_RIGHT)
 			{
-				if(map[x][y]==00) ++p2.x;
+				if(map[x][y]==00  || map[x][y] == 05) 
+				{
+				 	map[x][y]==17;
+					 ++p2.x;
+				}
 			}
 			else if(c==p2_DOWN)
 			{
 			
-				if(map[x][y]==00) ++p2.y;
-		
+				if(map[x][y]==00  || map[x][y] == 05) 
+				{
+				 	map[x][y]==17;
+					 ++p2.y;
+				}
 			}
 			else if(c==p2_UP)
 			{
-				if(map[x][y]==00) --p2.y;
+				if(map[x][y]==00 || map[x][y] == 05)
+				{
+				 	map[x][y]==17;
+					--p2.y;
+				}
 			}
-		}
 		gotoxy(p1.x,p1.y);
 		printf("¡Ü");
 		gotoxy(p2.x,p2.y);
