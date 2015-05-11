@@ -37,11 +37,11 @@ void map_type() //?? ????
 
 const char *get_shape(char code)
 {
-	 if(map[i][j]==ground)
+	 if(code==ground)
 		return "▦";
-	else if(map[i][j]>=building1 && map[i][j]<=building4)
+	else if(code>=building1 && code<=building4)
 		return "□";
-	else if(map[i][j]==grass)
+	else if(code==grass)
 		return "♧";
 }
 
@@ -57,7 +57,7 @@ void print_map(int num)
 	
 	for(int i=0;i<SERO;i++)
 		for(int j=0;j<GARO;j++)
-			fscanf("%d",&map[i][j]);
+			fscanf(fp,"%d",&map[i][j]);
 	fclose(fp);
 	
 	system("cls");					//게임 시작전 화면 초기화 
@@ -73,7 +73,9 @@ void print_map(int num)
 }
 int map_select() // ?? ????
 {
+	
 	int menu=0,key;
+	map_type();
 	while(1)  
 	{
 		if(kbhit())
