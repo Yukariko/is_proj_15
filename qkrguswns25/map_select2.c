@@ -30,7 +30,12 @@ void map_type() //?? ????
 
 const char *get_shape(char code)
 {
-	 return "¤±"; 
+	 if(map[i][j]==0)
+		return ¢Ë;
+	else if(map[i][j]>=1 && map[i][j]<=4)
+		return ¡à;
+	else if(map[i][j]==5)
+		return ¢¿;
 }
 
 void print_map(int num)
@@ -54,14 +59,9 @@ void print_map(int num)
 	{
 		for(int j=0;j<GARO;j++)
 		{
-			if(map[i][j]==0)
-				printf("¢Ë");
-			else if(map[i][j]>=1 && map[i][j]<=4)
-				printf("¡à");
-			else if(map[i][j]==5)
-				printf("¢¿");
-
+			printf("%s",get_shape(map[i][j]));
 		}
+		printf("\n");
 	}
 }
 int map_select() // ?? ????
