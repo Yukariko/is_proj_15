@@ -17,8 +17,8 @@
 #define BUILDING4 4
 #define GRASS 5
 #define BASE 3
-#define XJSI 2
-#define YISI 1
+#define XSI 2
+#define YSI 1
 
 char map[SERO+1][GARO+1];
 
@@ -49,11 +49,11 @@ const char *get_shape(char code)
 
 int get_x(int x)
 {
-	return BASE+j*XSI;
+	return BASE+x*XSI;
 }
 int get_y(int y)
 {
-	return BASE+i*YSI;
+	return BASE+y*YSI;
 }
 void print_map(int num)
 {
@@ -76,7 +76,7 @@ void print_map(int num)
 	{
 		for(int j=0;j<GARO;j++)
 		{
-			gotoxy(BASE+j*XJSI, BASE+i*YISI);
+			gotoxy(get_x(p1.x),get_y(p2.y) );
 			printf("%s",get_shape(map[i][j]));
 		}
 	}
