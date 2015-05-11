@@ -10,15 +10,15 @@
 #define ENTER 13
 #define SERO 16
 #define GARO 24
-#define ground 0
-#define building1 1
-#define building2 2
-#define building3 3
-#define building4 4
-#define grass 5
+#define GROUND 0
+#define BUILDING1 1
+#define BUILDING2 2
+#define BUILDING3 3
+#define BUILDING4 4
+#define GRASS 5
 #define BASE 3
-#define x 2
-#define y 1
+#define XJSI 2
+#define YISI 1
 
 char map[SERO+1][GARO+1];
 
@@ -39,11 +39,11 @@ void map_type() //?? ????
 
 const char *get_shape(char code)
 {
-	 if(code==ground)
+	 if(code==GROUND)
 		return "¢Ë";
-	else if(code>=building1 && code<=building4)
+	else if(code>=BUILDING1 && code<=BUILDING4)
 		return "¡à";
-	else if(code==grass)
+	else if(code==GRASS)
 		return "¢¿";
 }
 
@@ -68,7 +68,7 @@ void print_map(int num)
 	{
 		for(int j=0;j<GARO;j++)
 		{
-			gotoxy(BASE+j*x, BASE+i*y);
+			gotoxy(BASE+j*XJSI, BASE+i*YISI);
 			printf("%s",get_shape(map[i][j]));
 		}
 	}
@@ -147,7 +147,6 @@ int map_select() // ?? ????
 
 int main()
 {
-	map_type();
 	map_select();
 	return 0;
 }
