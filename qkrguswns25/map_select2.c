@@ -10,6 +10,13 @@
 #define ENTER 13
 #define SERO 16
 #define GARO 24
+#define ground 0
+#define building1 1
+#define building2 2
+#define building3 3
+#define building4 4
+#define grass 5
+
 
 char map[SERO+1][GARO+1];
 
@@ -30,12 +37,12 @@ void map_type() //?? ????
 
 const char *get_shape(char code)
 {
-	 if(map[i][j]==0)
+	 if(map[i][j]==ground)
 		return "¢Ë";
-	else if(map[i][j]>=1 && map[i][j]<=4)
+	else if(map[i][j]>=building1 && map[i][j]<=building4)
 		return "¡à";
-	else if(map[i][j]==5)
-		return0 "¢¿";
+	else if(map[i][j]==grass)
+		return "¢¿";
 }
 
 void print_map(int num)
