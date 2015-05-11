@@ -32,13 +32,10 @@ struct player
 	int x,y;
 };
 
+struct player p1,p2;
 
-void game_start()
+void init()
 {
-	system("cls");					//게임 시작전 화면 초기화 
-	
-	char c;
-	struct player p1,p2;
 	p1.heart=5;
 	p2.heart=5;
 	printf("%d %d \n",p1.heart,p2.heart);
@@ -46,15 +43,24 @@ void game_start()
 	p1.y=10;
 	p2.x=5;
 	p2.y=5;
+}
+
+void game_start()
+{
+	system("cls");					//게임 시작전 화면 초기화 
+	
+	char c;
+	
+	init();
 	
 	print_map(map_select());  //현준이 메뉴이동을 리턴값으로 수정 요망  
 	
 	while(1) //개임 시작중  
 	{
 	print_status();
-	printf_monster();             //시간조건필요 
-	printf_player();
-	printf_potion();              //시간조건필요  
+	print_monster();             //시간조건필요 
+	print_player();
+	print_potion();              //시간조건필요  
 	
 	while (kbhit()) 
 	{   //키 받기 
@@ -151,7 +157,7 @@ void game_start()
 	
 }
 
-void printf_player();
+void print_player();
 {
 	gotoxy(1P_respon_x,1P_respon_y);
 	puts("1P");
@@ -161,14 +167,8 @@ void printf_player();
 	
 
 }
-void printf_monster();
+void print_monster();
 {
 	gotoxy(monster_respon_x,monster_respon_y);
 	puts("monster");
 }
-
-
-
-
-
-
