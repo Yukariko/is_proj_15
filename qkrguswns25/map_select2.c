@@ -16,7 +16,7 @@
 #define building3 3
 #define building4 4
 #define grass 5
-
+#define BASE 3
 
 char map[SERO+1][GARO+1];
 
@@ -66,7 +66,7 @@ void print_map(int num)
 	{
 		for(int j=0;j<GARO;j++)
 		{
-			gotoxy(3+j*3,3+i*2);
+			gotoxy(BASE+j*2, BASE+i);
 			printf("%s",get_shape(map[i][j]));
 		}
 	}
