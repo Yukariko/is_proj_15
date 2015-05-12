@@ -273,7 +273,6 @@ void game_start()
 			{
 				if(map[p1.y+1][p1.x]==00  || map[p1.y+1][p1.x] == 05)
 				{
-				 	swap(&map[p1.y+1][p1.x],&map[p1.y][p1.x]);
 					map[p1.y+1][p1.x]=20;
 				 	++p1.y;
 				 }
@@ -283,7 +282,6 @@ void game_start()
 			
 				if(map[p1.y][p1.x+1]==00  || map[p1.y][p1.x+1] == 05)
 				{
-				 	swap(&map[p1.y][p1.x+1],&map[p1.y][p1.x]);
 					map[p1.y][p1.x+1]=20;
 					 ++p1.x;
 				}
@@ -292,7 +290,6 @@ void game_start()
 			{
 				if(map[p1.y][p1.x-1]==00  || map[p1.y][p1.x-1] == 05)
 				{
-				 	swap(&map[p1.y][p1.x-1],&map[p1.y][p1.x]);
 					map[p1.y][p1.x-1]=20;
 					--p1.x;
 				}
