@@ -27,7 +27,7 @@ void gotoxy(int x, int y)
 	COORD Pos = { x-1, y-1 };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
 }
-void map_type() //?? ????
+void map_type() //¸Ê Á¾·ù
 {
 	gotoxy(26,26);
 	printf("¸Ê 1");
@@ -76,12 +76,12 @@ void print_map(int num)
 	{
 		for(int j=0;j<GARO;j++)
 		{
-			gotoxy(get_x(p1.x),get_y(p2.y) );
+			gotoxy(get_x(j),get_y(i) );
 			printf("%s",get_shape(map[i][j]));
 		}
 	}
 }
-int map_select() // ?? ????
+int map_select() // ¸Ê ¼±ÅÃ
 {
 	
 	int menu=0,key;
