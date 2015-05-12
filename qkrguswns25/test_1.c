@@ -224,6 +224,10 @@ void print_map(int num)
 		}
 	}
 }
+void gaming_print_map(int y,int x)
+{
+	printf("%s",get_shape(map[y][x]));
+}
 void game_start()
 {
 	system("cls");					//게임 시작전 화면 초기화 
@@ -266,7 +270,9 @@ void game_start()
 					map[p1.y][p1.x]=GRASS;
 					 --p1.y;
 				}
-				 	 
+				 
+			gaming_print_map(p1.y,p1.x);
+			gaming_print_map(p1.y-1,p1.x);
 				
 			}
 			else if(c==DOWN)
@@ -294,7 +300,6 @@ void game_start()
 					--p1.x;
 				}
 			}
-
 			gotoxy(get_x(p1.x),get_y(p1.y));
 			printf("●");
  		}
