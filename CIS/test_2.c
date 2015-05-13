@@ -38,19 +38,19 @@ char map[101][101];
 int timer = 1;
 while(1) // 메뉴 키조작 
 {
-  if(kbhit())
-  {
-      key = getch();
-      if(key == UP)menu-=1;
-      else if(key == DOWN)menu+=1;
-      else if(key == SPACE || key == ENTER)choice=1;
-      else choice=2;
-  }
-  if(timer == 1000)
-	{
-		move_bullet();	
-	}
-  timer++;
+if(kbhit())
+{
+key = getch();
+if(key == UP)menu-=1;
+else if(key == DOWN)menu+=1;
+else if(key == SPACE || key == ENTER)choice=1;
+else choice=2;
+}
+if(timer == 1000)
+{
+move_bullet();	
+}
+timer++;
 }
 */
 int swap(int *before,int *after)
@@ -184,7 +184,7 @@ int map_select() // ?? ????
 
 const char *get_shape(char code)
 {
-	 if(code==GROUND)
+	if(code==GROUND)
 		return "▦";
 	else if(code>=BUILDING1 && code<=BUILDING4)
 		return "□";
@@ -209,14 +209,14 @@ void print_map(int num)
 		fp = fopen("./맵2.txt","r");
 	else
 		fp = fopen("./맵3.txt","r");
-	
+
 	for(int i=0;i<SERO;i++)
 		for(int j=0;j<GARO;j++)
 			fscanf(fp,"%d",&map[i][j]);
 	fclose(fp);
-	
+
 	system("cls");					//게임 시작전 화면 초기화 
-	
+
 	for(int i=0;i<SERO;i++)
 	{
 		for(int j=0;j<GARO;j++)
@@ -233,11 +233,11 @@ void gaming_print_map(int y,int x)
 void game_start()
 {
 	system("cls");					//게임 시작전 화면 초기화 
-	
+
 	char c;
-	
+
 	init();
-	
+
 	print_map(map_select());  //현준이 메뉴이동을 리턴값으로 수정 요망  
 	gotoxy(get_x(1),get_y(SERO-2));
 	printf("●");
@@ -258,102 +258,102 @@ void game_start()
 				if(map[p1.y][p1.x]==GROUND && map[p1.y-1][p1.x]==GROUND0 || map[p1.y][p1.x]==GRASS && map[p1.y-1][p1.x]==GRASS)
 				{
 					swap(&map[p1.y-1][p1.x],&map[p1.y][p1.x]);
-				 	map[p1.y-1][p1.x]=PLAYER_P1;
-					 --p1.y;
+					map[p1.y-1][p1.x]=PLAYER_P1;
+					--p1.y;
 				}
 				else if(map[p1.y][p1.x]==GROUND && map[p1.y-1][p1.x]==GRASS)
 				{
-				 	map[p1.y-1][p1.x]=GRASS;
+					map[p1.y-1][p1.x]=GRASS;
 					map[p1.y][p1.x]=GROUND;
-					 --p1.y;
+					--p1.y;
 				}
 				else if(map[p1.y][p1.x]==GRASS && map[p1.y-1][p1.x]==GROUND)
 				{
-				 	map[p1.y-1][p1.x]=PLAYER_P1;
+					map[p1.y-1][p1.x]=PLAYER_P1;
 					map[p1.y][p1.x]=GRASS;
-					 --p1.y;
+					--p1.y;
 				}
-				 
-			gaming_print_map(p1.y,p1.x);
-			gaming_print_map(p1.y-1,p1.x);
-				
+
+				gaming_print_map(p1.y,p1.x);
+				gaming_print_map(p1.y-1,p1.x);
+
 			}
 			else if(c==DOWN)
 			{
-					if(map[p1.y][p1.x]==GROUND && map[p1.y+1][p1.x]==GROUND || map[p1.y][p1.x]==GRASS && map[p1.y+1][p1.x]==GRASS)
+				if(map[p1.y][p1.x]==GROUND && map[p1.y+1][p1.x]==GROUND || map[p1.y][p1.x]==GRASS && map[p1.y+1][p1.x]==GRASS)
 				{
 					swap(&map[p1.y+1][p1.x],&map[p1.y][p1.x]);
-				 	map[p1.y+1][p1.x]=PLAYER_P1;
-					 ++p1.y;
+					map[p1.y+1][p1.x]=PLAYER_P1;
+					++p1.y;
 				}
 				else if(map[p1.y][p1.x]==GROUND && map[p1.y+1][p1.x]==GRASS)
 				{
-				 	map[p1.y+1][p1.x]=GRASS;
+					map[p1.y+1][p1.x]=GRASS;
 					map[p1.y][p1.x]=GROUND;
-					 ++p1.y;
+					++p1.y;
 				}
 				else if(map[p1.y][p1.x]==GRASS && map[p1.y+1][p1.x]==GROUND)
 				{
-				 	map[p1.y+1][p1.x]=PLAYER_P1;
+					map[p1.y+1][p1.x]=PLAYER_P1;
 					map[p1.y][p1.x]=GRASS;
-					 ++p1.y;
+					++p1.y;
 				}
-				 
-			gaming_print_map(p1.y,p1.x);
-			gaming_print_map(p1.y+1,p1.x);
+
+				gaming_print_map(p1.y,p1.x);
+				gaming_print_map(p1.y+1,p1.x);
 			}
 			else if(c==RIGHT)
 			{
-			
-					if(map[p1.y][p1.x]==GROUND && map[p1.y][p1.x+1]==GROUND || map[p1.y][p1.x]==GRASS && map[p1.y][p1.x+1]==GRASS)
+
+				if(map[p1.y][p1.x]==GROUND && map[p1.y][p1.x+1]==GROUND || map[p1.y][p1.x]==GRASS && map[p1.y][p1.x+1]==GRASS)
 				{
 					swap(&map[p1.y][p1.x+1],&map[p1.y][p1.x]);
-				 	map[p1.y][p1.x+1]=PLAYER_P1;
-					 ++p1.x;
+					map[p1.y][p1.x+1]=PLAYER_P1;
+					++p1.x;
 				}
 				else if(map[p1.y][p1.x]==GROUND && map[p1.y][p1.x+1]==GRASS)
 				{
-				 	map[p1.y][p1.x+1]=GRASS;
+					map[p1.y][p1.x+1]=GRASS;
 					map[p1.y][p1.x]=GROUND;
-					 ++p1.x;
+					++p1.x;
 				}
 				else if(map[p1.y][p1.x]==GRASS && map[p1.y][p1.x+1]==GROUND)
 				{
-				 	map[p1.y][p1.x+1]=PLAYER_P1;
+					map[p1.y][p1.x+1]=PLAYER_P1;
 					map[p1.y][p1.x]=GRASS;
-					 ++p1.x;
+					++p1.x;
 				}
-				 
-			gaming_print_map(p1.y,p1.x);
-			gaming_print_map(p1.y,p1.x+1);
+
+				gaming_print_map(p1.y,p1.x);
+				gaming_print_map(p1.y,p1.x+1);
 			}
 			else if(c==LEFT)
 			{
 				if(map[p1.y][p1.x]==GROUND && map[p1.y][p1.x-1]==GROUND || map[p1.y][p1.x]==GRASS && map[p1.y][p1.x-1]==GRASS)
 				{
 					swap(&map[p1.y][p1.x-1],&map[p1.y][p1.x]);
-				 	map[p1.y][p1.x-1]=PLAYER_P1;
-					 --p1.x;
+					map[p1.y][p1.x-1]=PLAYER_P1;
+					--p1.x;
 				}
 				else if(map[p1.y][p1.x]==GROUND && map[p1.y][p1.x-1]==GRASS)
 				{
-				 	map[p1.y][p1.x-1]=GRASS;
+					map[p1.y][p1.x-1]=GRASS;
 					map[p1.y][p1.x]=GROUND;
-					 --p1.x;
+					--p1.x;
 				}
 				else if(map[p1.y][p1.x]==GRASS && map[p1.y][p1.x-1]==GROUND)
 				{
-				 	map[p1.y][p1.x-1]=PLAYER_P1;
+					map[p1.y][p1.x-1]=PLAYER_P1;
 					map[p1.y][p1.x]=GRASS;
-					 --p1.x;
+					--p1.x;
 				}
-				 
-			gaming_print_map(p1.y,p1.x);
-			gaming_print_map(p1.y,p1.x-1);
+
+				gaming_print_map(p1.y,p1.x);
+				gaming_print_map(p1.y,p1.x-1);
 			}
 			gotoxy(get_x(p1.x),get_y(p1.y));
 			printf("●");
- 		}
+		}
 	}
 }
 
@@ -361,10 +361,10 @@ void print_player()
 {
 	//gotoxy(1P_respon_x,1P_respon_y);
 	puts("1P");
-	
+
 	//gotoxy(2P_respon_x,2P_respon_y);
 	puts("2P");
-	
+
 
 }
 void print_monster()
@@ -377,279 +377,279 @@ void start()
 {
 	int x, y, i;
 	char c;
-	
+
 	textcolor(0x0005);
 	for(i=0;i<8;i+=2) // C
-    {
-      Sleep(30);
-      gotoxy(12-i,2);
-      printf("◆");
-      }
-    for(i=0;i<1;i++)
-    {
-      Sleep(30);
-      gotoxy(4,3);
-      printf("◆");
-      }
-    for(i=0;i<3;i++)
-    {
-      Sleep(30);
-      gotoxy(3,4+i);
-      printf("◆");
-      }
-    for(i=0;i<1;i++)
-    {
-      Sleep(30);
-      gotoxy(4,7);
-      printf("◆");
-      }
-    for(i=0;i<8;i+=2) 
-    {
-      Sleep(30);
-      gotoxy(6+i,8);
-      printf("◆");
-      }
-      
-    for(i=0;i<7;i++) // R
-    {
-      Sleep(30);
-      gotoxy(16,2+i);
-      printf("◆");
-      }
-    for(i=0;i<6;i+=2)
-    {
-      Sleep(30);
-      gotoxy(18+i,2);
-      printf("◆");
-    }
-    for(i=0;i<2;i++)
-    {
-      Sleep(30);
-      gotoxy(23,3+i);
-      printf("◆");
-    }
-    for(i=0;i<6;i+=2)
-    {
-      Sleep(30);
-      gotoxy(22-i,5);
-      printf("◆");
-    }
-    for(i=0;i<3;i++)
-    {
-      Sleep(30);
-      gotoxy(23+i,6+i);
-      printf("◆");
-    } 
-      
-     for(i=0;i<1;i++) // A
-    {
-      Sleep(30);
-      gotoxy(33,2);
-      printf("◆");
-    }
-    for(i=0;i<4;i++)
-    {
-      Sleep(30);
-      gotoxy(32-i,3+i);
-      printf("◆");
-    }
-    for(i=0;i<2;i++)
-    {
-      Sleep(30);
-      gotoxy(29,7+i);
-      printf("◆");
-    }
-    for(i=0;i<4;i++)
-    {
-      Sleep(30);
-      gotoxy(34+i,3+i);
-      printf("◆");
-    }
-    for(i=0;i<2;i++)
-    {
-      Sleep(30);
-      gotoxy(37,7+i);
-      printf("◆");
-    }
-    for(i=0;i<5;i+=2)
-    {
-      Sleep(30);
-      gotoxy(31+i,6);
-      printf("◆");
-    }
-      
-      for(i=0; i<10; i+=2) //Z
-      {
-      	Sleep(30);
-      	gotoxy(41+i,2);
-      	printf("◆");
-	  }
-	  
-	  for(i=0; i<5; i++)
-      {
-      	Sleep(30);
-      	gotoxy(47-i,3+i);
-      	printf("◆");
-	  }
-	  
-	  for(i=0; i<10; i+=2)
-      {
-      	Sleep(30);
-      	gotoxy(41+i,8);
-      	printf("◆");
-	  }
-	  
-	  for(i=0;i<4;i++) // Y
-    {
-      Sleep(30);
-      gotoxy(53+i,2+i);
-      printf("◆");
-      }
-    for(i=0;i<4;i++)
-    {
-      Sleep(30);
-      gotoxy(61-i,2+i);
-      printf("◆");
-      }
-    for(i=0;i<3;i++)
-    {
-      Sleep(30);
-      gotoxy(57,6+i);
-      printf("◆");
-    }
-    
-    textcolor(0x000C);
-    Sleep(400);
-    
-    for(i=0;i<1;i++) // A
-    {
-      gotoxy(14,12);
-      printf("◆");
-      }
-    for(i=0;i<4;i++)
-    {
-      gotoxy(13-i,13+i);
-      printf("◆");
-      }
-    for(i=0;i<2;i++)
-    {
-      gotoxy(10,17+i);
-      printf("◆");
-      }
-    for(i=0;i<4;i++)
-    {
-      gotoxy(15+i,13+i);
-      printf("◆");
-      }
-    for(i=0;i<2;i++)
-    {
-      gotoxy(18,17+i);
-      printf("◆");
-    }
-    for(i=0;i<7;i+=2)
-    {
-      gotoxy(10+i,16);
-      printf("◆");
-    }
-    
-    Sleep(400);
-      
-      for(i=0;i<10;i+=2) // T
-    {
-      gotoxy(22+i,12);
-      printf("◆");
-    }
-    for(i=0;i<6;i++)
-    {
-      gotoxy(26,13+i);
-      printf("◆");
-    }
-    
-    Sleep(400);
-    
-    for(i=0;i<10;i+=2) // T
-    {
-      gotoxy(34+i,12);
-      printf("◆");
-    }
-    for(i=0;i<6;i++)
-    {
-      gotoxy(38,13+i);
-      printf("◆");
-    }
-    
-    Sleep(400);
-    
-    for(i=0;i<1;i++) // A
-    {
-      gotoxy(49,12);
-      printf("◆");
-    }
-    for(i=0;i<4;i++)
-    {
-      gotoxy(48-i,13+i);
-      printf("◆");
-    }
-    for(i=0;i<2;i++)
-    {
-      gotoxy(45,17+i);
-      printf("◆");
-      }
-    for(i=0;i<4;i++)
-    {
-      gotoxy(50+i,13+i);
-      printf("◆");
-      }
-    for(i=0;i<2;i++)
-    {
-      gotoxy(53,17+i);
-      printf("◆");
-      }
-    for(i=0;i<7;i+=2)
-    {
-      gotoxy(45+i,16);
-      printf("◆");
-    }
-    
-    Sleep(400);
-    
-    for(i=0;i<8;i+=2) // C
-    {
-      gotoxy(66-i,12);
-      printf("◆");
-    }
-    for(i=0;i<1;i++)
-    {
-      gotoxy(58,13);
-      printf("◆");
-    }
-    for(i=0;i<3;i++)
-    {
-      gotoxy(57,14+i);
-      printf("◆");
-    }
-    for(i=0;i<1;i++)
-    {
-      gotoxy(58,17);
-      printf("◆");
-    }
-    for(i=0;i<8;i+=2) 
-    {
-      gotoxy(60+i,18);
-      printf("◆");
-    }
-    
-    Sleep(400);
-    
-    for(i=0; i<7; i++) //K
-    {
-    	gotoxy(70,12+i);
-    	printf("◆");
+	{
+		Sleep(30);
+		gotoxy(12-i,2);
+		printf("◆");
 	}
-    for(i=0; i<4; i++)
-    {
-    	gotoxy(77-i,12+i);
-    	printf("◆");
+	for(i=0;i<1;i++)
+	{
+		Sleep(30);
+		gotoxy(4,3);
+		printf("◆");
+	}
+	for(i=0;i<3;i++)
+	{
+		Sleep(30);
+		gotoxy(3,4+i);
+		printf("◆");
+	}
+	for(i=0;i<1;i++)
+	{
+		Sleep(30);
+		gotoxy(4,7);
+		printf("◆");
+	}
+	for(i=0;i<8;i+=2) 
+	{
+		Sleep(30);
+		gotoxy(6+i,8);
+		printf("◆");
+	}
+
+	for(i=0;i<7;i++) // R
+	{
+		Sleep(30);
+		gotoxy(16,2+i);
+		printf("◆");
+	}
+	for(i=0;i<6;i+=2)
+	{
+		Sleep(30);
+		gotoxy(18+i,2);
+		printf("◆");
+	}
+	for(i=0;i<2;i++)
+	{
+		Sleep(30);
+		gotoxy(23,3+i);
+		printf("◆");
+	}
+	for(i=0;i<6;i+=2)
+	{
+		Sleep(30);
+		gotoxy(22-i,5);
+		printf("◆");
+	}
+	for(i=0;i<3;i++)
+	{
+		Sleep(30);
+		gotoxy(23+i,6+i);
+		printf("◆");
+	} 
+
+	for(i=0;i<1;i++) // A
+	{
+		Sleep(30);
+		gotoxy(33,2);
+		printf("◆");
+	}
+	for(i=0;i<4;i++)
+	{
+		Sleep(30);
+		gotoxy(32-i,3+i);
+		printf("◆");
+	}
+	for(i=0;i<2;i++)
+	{
+		Sleep(30);
+		gotoxy(29,7+i);
+		printf("◆");
+	}
+	for(i=0;i<4;i++)
+	{
+		Sleep(30);
+		gotoxy(34+i,3+i);
+		printf("◆");
+	}
+	for(i=0;i<2;i++)
+	{
+		Sleep(30);
+		gotoxy(37,7+i);
+		printf("◆");
+	}
+	for(i=0;i<5;i+=2)
+	{
+		Sleep(30);
+		gotoxy(31+i,6);
+		printf("◆");
+	}
+
+	for(i=0; i<10; i+=2) //Z
+	{
+		Sleep(30);
+		gotoxy(41+i,2);
+		printf("◆");
+	}
+
+	for(i=0; i<5; i++)
+	{
+		Sleep(30);
+		gotoxy(47-i,3+i);
+		printf("◆");
+	}
+
+	for(i=0; i<10; i+=2)
+	{
+		Sleep(30);
+		gotoxy(41+i,8);
+		printf("◆");
+	}
+
+	for(i=0;i<4;i++) // Y
+	{
+		Sleep(30);
+		gotoxy(53+i,2+i);
+		printf("◆");
+	}
+	for(i=0;i<4;i++)
+	{
+		Sleep(30);
+		gotoxy(61-i,2+i);
+		printf("◆");
+	}
+	for(i=0;i<3;i++)
+	{
+		Sleep(30);
+		gotoxy(57,6+i);
+		printf("◆");
+	}
+
+	textcolor(0x000C);
+	Sleep(400);
+
+	for(i=0;i<1;i++) // A
+	{
+		gotoxy(14,12);
+		printf("◆");
+	}
+	for(i=0;i<4;i++)
+	{
+		gotoxy(13-i,13+i);
+		printf("◆");
+	}
+	for(i=0;i<2;i++)
+	{
+		gotoxy(10,17+i);
+		printf("◆");
+	}
+	for(i=0;i<4;i++)
+	{
+		gotoxy(15+i,13+i);
+		printf("◆");
+	}
+	for(i=0;i<2;i++)
+	{
+		gotoxy(18,17+i);
+		printf("◆");
+	}
+	for(i=0;i<7;i+=2)
+	{
+		gotoxy(10+i,16);
+		printf("◆");
+	}
+
+	Sleep(400);
+
+	for(i=0;i<10;i+=2) // T
+	{
+		gotoxy(22+i,12);
+		printf("◆");
+	}
+	for(i=0;i<6;i++)
+	{
+		gotoxy(26,13+i);
+		printf("◆");
+	}
+
+	Sleep(400);
+
+	for(i=0;i<10;i+=2) // T
+	{
+		gotoxy(34+i,12);
+		printf("◆");
+	}
+	for(i=0;i<6;i++)
+	{
+		gotoxy(38,13+i);
+		printf("◆");
+	}
+
+	Sleep(400);
+
+	for(i=0;i<1;i++) // A
+	{
+		gotoxy(49,12);
+		printf("◆");
+	}
+	for(i=0;i<4;i++)
+	{
+		gotoxy(48-i,13+i);
+		printf("◆");
+	}
+	for(i=0;i<2;i++)
+	{
+		gotoxy(45,17+i);
+		printf("◆");
+	}
+	for(i=0;i<4;i++)
+	{
+		gotoxy(50+i,13+i);
+		printf("◆");
+	}
+	for(i=0;i<2;i++)
+	{
+		gotoxy(53,17+i);
+		printf("◆");
+	}
+	for(i=0;i<7;i+=2)
+	{
+		gotoxy(45+i,16);
+		printf("◆");
+	}
+
+	Sleep(400);
+
+	for(i=0;i<8;i+=2) // C
+	{
+		gotoxy(66-i,12);
+		printf("◆");
+	}
+	for(i=0;i<1;i++)
+	{
+		gotoxy(58,13);
+		printf("◆");
+	}
+	for(i=0;i<3;i++)
+	{
+		gotoxy(57,14+i);
+		printf("◆");
+	}
+	for(i=0;i<1;i++)
+	{
+		gotoxy(58,17);
+		printf("◆");
+	}
+	for(i=0;i<8;i+=2) 
+	{
+		gotoxy(60+i,18);
+		printf("◆");
+	}
+
+	Sleep(400);
+
+	for(i=0; i<7; i++) //K
+	{
+		gotoxy(70,12+i);
+		printf("◆");
+	}
+	for(i=0; i<4; i++)
+	{
+		gotoxy(77-i,12+i);
+		printf("◆");
 	}
 	for(i=0; i<1; i++)
 	{
@@ -657,11 +657,11 @@ void start()
 		printf("◆");
 	}
 	for(i=0; i<3; i++)
-    {
-    	gotoxy(75+i,16+i);
-    	printf("◆");
+	{
+		gotoxy(75+i,16+i);
+		printf("◆");
 	}
-	
+
 	textcolor(0x0007);
 	for(i=0; i<5; i++) printf("\n");
 	printf("                                press any key...\n");
@@ -672,395 +672,395 @@ void start()
 			system("cls");
 			return;
 		}
-			
-				
-			
+
+
+
 		//어두운 회색으로 바꾸기 
-		
+
 		textcolor(0x0008);
 		Sleep(200);
-		
+
 		for(i=0;i<1;i++) // A
-	    {
-	      gotoxy(33,2);
-	      printf("◆");
-	    }
-	    for(i=0;i<4;i++)
-	    {
-	      gotoxy(32-i,3+i);
-	      printf("◆");
-	    }
-	    for(i=0;i<2;i++)
-	    {
-	      gotoxy(29,7+i);
-	      printf("◆");
-	    }
-	    for(i=0;i<4;i++)
-	    {
-	      gotoxy(34+i,3+i);
-	      printf("◆");
-	    }
-	    for(i=0;i<2;i++)
-	    {
-	      gotoxy(37,7+i);
-	      printf("◆");
-	    }
-	    for(i=0;i<5;i+=2)
-	    {
-	      gotoxy(31+i,6);
-	      printf("◆");
-	    }
-	    
-	    Sleep(300);
-	    
-	    for(i=0;i<7;i++) // R
-	    {
-	      gotoxy(16,2+i);
-	      printf("◆");
-	      }
-	    for(i=0;i<6;i+=2)
-	    {
-	      gotoxy(18+i,2);
-	      printf("◆");
-	    }
-	    for(i=0;i<2;i++)
-	    {
-	      gotoxy(23,3+i);
-	      printf("◆");
-	    }
-	    for(i=0;i<6;i+=2)
-	    {
-	      gotoxy(22-i,5);
-	      printf("◆");
-	    }
-	    for(i=0;i<3;i++)
-	    {
-	      gotoxy(23+i,6+i);
-	      printf("◆");
-	    } 
-	    
-	    for(i=0; i<10; i+=2) //Z
-	      {
-	      	gotoxy(41+i,2);
-	      	printf("◆");
-		  }
-		  
-		  for(i=0; i<5; i++)
-	      {
-	      	gotoxy(47-i,3+i);
-	      	printf("◆");
-		  }
-		  
-		  for(i=0; i<10; i+=2)
-	      {
-	      	gotoxy(41+i,8);
-	      	printf("◆");
-		  }
-		  
-		  Sleep(300);
-		
-	 	for(i=0;i<8;i+=2) // C
-	    {
-	      gotoxy(12-i,2);
-	      printf("◆");
-	    }
-	    for(i=0;i<1;i++)
-	    {
-	      gotoxy(4,3);
-	      printf("◆");
-	      }
-	    for(i=0;i<3;i++)
-	    {
-	      gotoxy(3,4+i);
-	      printf("◆");
-	      }
-	    for(i=0;i<1;i++)
-	    {
-	      gotoxy(4,7);
-	      printf("◆");
-	      }
-	    for(i=0;i<8;i+=2) 
-	    {
-	      gotoxy(6+i,8);
-	      printf("◆");
-	  }
-	       
-		  for(i=0;i<4;i++) // Y
-	    {
-	      gotoxy(53+i,2+i);
-	      printf("◆");
-	      }
-	    for(i=0;i<4;i++)
-	    {
-	      gotoxy(61-i,2+i);
-	      printf("◆");
-	      }
-	    for(i=0;i<3;i++)
-	    {
-	      gotoxy(57,6+i);
-	      printf("◆");
-	    }
-	    
-	    //밝은 회색으로 바꾸기 
-	    
-	    textcolor(0x0007);
+		{
+			gotoxy(33,2);
+			printf("◆");
+		}
+		for(i=0;i<4;i++)
+		{
+			gotoxy(32-i,3+i);
+			printf("◆");
+		}
+		for(i=0;i<2;i++)
+		{
+			gotoxy(29,7+i);
+			printf("◆");
+		}
+		for(i=0;i<4;i++)
+		{
+			gotoxy(34+i,3+i);
+			printf("◆");
+		}
+		for(i=0;i<2;i++)
+		{
+			gotoxy(37,7+i);
+			printf("◆");
+		}
+		for(i=0;i<5;i+=2)
+		{
+			gotoxy(31+i,6);
+			printf("◆");
+		}
+
+		Sleep(300);
+
+		for(i=0;i<7;i++) // R
+		{
+			gotoxy(16,2+i);
+			printf("◆");
+		}
+		for(i=0;i<6;i+=2)
+		{
+			gotoxy(18+i,2);
+			printf("◆");
+		}
+		for(i=0;i<2;i++)
+		{
+			gotoxy(23,3+i);
+			printf("◆");
+		}
+		for(i=0;i<6;i+=2)
+		{
+			gotoxy(22-i,5);
+			printf("◆");
+		}
+		for(i=0;i<3;i++)
+		{
+			gotoxy(23+i,6+i);
+			printf("◆");
+		} 
+
+		for(i=0; i<10; i+=2) //Z
+		{
+			gotoxy(41+i,2);
+			printf("◆");
+		}
+
+		for(i=0; i<5; i++)
+		{
+			gotoxy(47-i,3+i);
+			printf("◆");
+		}
+
+		for(i=0; i<10; i+=2)
+		{
+			gotoxy(41+i,8);
+			printf("◆");
+		}
+
+		Sleep(300);
+
+		for(i=0;i<8;i+=2) // C
+		{
+			gotoxy(12-i,2);
+			printf("◆");
+		}
+		for(i=0;i<1;i++)
+		{
+			gotoxy(4,3);
+			printf("◆");
+		}
+		for(i=0;i<3;i++)
+		{
+			gotoxy(3,4+i);
+			printf("◆");
+		}
+		for(i=0;i<1;i++)
+		{
+			gotoxy(4,7);
+			printf("◆");
+		}
+		for(i=0;i<8;i+=2) 
+		{
+			gotoxy(6+i,8);
+			printf("◆");
+		}
+
+		for(i=0;i<4;i++) // Y
+		{
+			gotoxy(53+i,2+i);
+			printf("◆");
+		}
+		for(i=0;i<4;i++)
+		{
+			gotoxy(61-i,2+i);
+			printf("◆");
+		}
+		for(i=0;i<3;i++)
+		{
+			gotoxy(57,6+i);
+			printf("◆");
+		}
+
+		//밝은 회색으로 바꾸기 
+
+		textcolor(0x0007);
 		Sleep(200);
-		
+
 		for(i=0;i<1;i++) // A
-	    {
-	      gotoxy(33,2);
-	      printf("◆");
-	    }
-	    for(i=0;i<4;i++)
-	    {
-	      gotoxy(32-i,3+i);
-	      printf("◆");
-	    }
-	    for(i=0;i<2;i++)
-	    {
-	      gotoxy(29,7+i);
-	      printf("◆");
-	    }
-	    for(i=0;i<4;i++)
-	    {
-	      gotoxy(34+i,3+i);
-	      printf("◆");
-	    }
-	    for(i=0;i<2;i++)
-	    {
-	      gotoxy(37,7+i);
-	      printf("◆");
-	    }
-	    for(i=0;i<5;i+=2)
-	    {
-	      gotoxy(31+i,6);
-	      printf("◆");
-	    }
-	    
-	    Sleep(300);
-	    
-	    for(i=0;i<7;i++) // R
-	    {
-	      gotoxy(16,2+i);
-	      printf("◆");
-	      }
-	    for(i=0;i<6;i+=2)
-	    {
-	      gotoxy(18+i,2);
-	      printf("◆");
-	    }
-	    for(i=0;i<2;i++)
-	    {
-	      gotoxy(23,3+i);
-	      printf("◆");
-	    }
-	    for(i=0;i<6;i+=2)
-	    {
-	      gotoxy(22-i,5);
-	      printf("◆");
-	    }
-	    for(i=0;i<3;i++)
-	    {
-	      gotoxy(23+i,6+i);
-	      printf("◆");
-	    } 
-	    
-	    for(i=0; i<10; i+=2) //Z
-	      {
-	      	gotoxy(41+i,2);
-	      	printf("◆");
-		  }
-		  
-		  for(i=0; i<5; i++)
-	      {
-	      	gotoxy(47-i,3+i);
-	      	printf("◆");
-		  }
-		  
-		  for(i=0; i<10; i+=2)
-	      {
-	      	gotoxy(41+i,8);
-	      	printf("◆");
-		  }
-		  
-		  Sleep(300);
-		
-	 	for(i=0;i<8;i+=2) // C
-	    {
-	      gotoxy(12-i,2);
-	      printf("◆");
-	    }
-	    for(i=0;i<1;i++)
-	    {
-	      gotoxy(4,3);
-	      printf("◆");
-	      }
-	    for(i=0;i<3;i++)
-	    {
-	      gotoxy(3,4+i);
-	      printf("◆");
-	      }
-	    for(i=0;i<1;i++)
-	    {
-	      gotoxy(4,7);
-	      printf("◆");
-	      }
-	    for(i=0;i<8;i+=2) 
-	    {
-	      gotoxy(6+i,8);
-	      printf("◆");
-	  }
-	       
-		  for(i=0;i<4;i++) // Y
-	    {
-	      gotoxy(53+i,2+i);
-	      printf("◆");
-	      }
-	    for(i=0;i<4;i++)
-	    {
-	      gotoxy(61-i,2+i);
-	      printf("◆");
-	      }
-	    for(i=0;i<3;i++)
-	    {
-	      gotoxy(57,6+i);
-	      printf("◆");
-	    }
-	    //보라색으로 바꾸기
-		
+		{
+			gotoxy(33,2);
+			printf("◆");
+		}
+		for(i=0;i<4;i++)
+		{
+			gotoxy(32-i,3+i);
+			printf("◆");
+		}
+		for(i=0;i<2;i++)
+		{
+			gotoxy(29,7+i);
+			printf("◆");
+		}
+		for(i=0;i<4;i++)
+		{
+			gotoxy(34+i,3+i);
+			printf("◆");
+		}
+		for(i=0;i<2;i++)
+		{
+			gotoxy(37,7+i);
+			printf("◆");
+		}
+		for(i=0;i<5;i+=2)
+		{
+			gotoxy(31+i,6);
+			printf("◆");
+		}
+
+		Sleep(300);
+
+		for(i=0;i<7;i++) // R
+		{
+			gotoxy(16,2+i);
+			printf("◆");
+		}
+		for(i=0;i<6;i+=2)
+		{
+			gotoxy(18+i,2);
+			printf("◆");
+		}
+		for(i=0;i<2;i++)
+		{
+			gotoxy(23,3+i);
+			printf("◆");
+		}
+		for(i=0;i<6;i+=2)
+		{
+			gotoxy(22-i,5);
+			printf("◆");
+		}
+		for(i=0;i<3;i++)
+		{
+			gotoxy(23+i,6+i);
+			printf("◆");
+		} 
+
+		for(i=0; i<10; i+=2) //Z
+		{
+			gotoxy(41+i,2);
+			printf("◆");
+		}
+
+		for(i=0; i<5; i++)
+		{
+			gotoxy(47-i,3+i);
+			printf("◆");
+		}
+
+		for(i=0; i<10; i+=2)
+		{
+			gotoxy(41+i,8);
+			printf("◆");
+		}
+
+		Sleep(300);
+
+		for(i=0;i<8;i+=2) // C
+		{
+			gotoxy(12-i,2);
+			printf("◆");
+		}
+		for(i=0;i<1;i++)
+		{
+			gotoxy(4,3);
+			printf("◆");
+		}
+		for(i=0;i<3;i++)
+		{
+			gotoxy(3,4+i);
+			printf("◆");
+		}
+		for(i=0;i<1;i++)
+		{
+			gotoxy(4,7);
+			printf("◆");
+		}
+		for(i=0;i<8;i+=2) 
+		{
+			gotoxy(6+i,8);
+			printf("◆");
+		}
+
+		for(i=0;i<4;i++) // Y
+		{
+			gotoxy(53+i,2+i);
+			printf("◆");
+		}
+		for(i=0;i<4;i++)
+		{
+			gotoxy(61-i,2+i);
+			printf("◆");
+		}
+		for(i=0;i<3;i++)
+		{
+			gotoxy(57,6+i);
+			printf("◆");
+		}
+		//보라색으로 바꾸기
+
 		textcolor(0x0005);
 		Sleep(200);
-		
+
 		for(i=0;i<1;i++) // A
-	    {
-	      gotoxy(33,2);
-	      printf("◆");
-	    }
-	    for(i=0;i<4;i++)
-	    {
-	      gotoxy(32-i,3+i);
-	      printf("◆");
-	    }
-	    for(i=0;i<2;i++)
-	    {
-	      gotoxy(29,7+i);
-	      printf("◆");
-	    }
-	    for(i=0;i<4;i++)
-	    {
-	      gotoxy(34+i,3+i);
-	      printf("◆");
-	    }
-	    for(i=0;i<2;i++)
-	    {
-	      gotoxy(37,7+i);
-	      printf("◆");
-	    }
-	    for(i=0;i<5;i+=2)
-	    {
-	      gotoxy(31+i,6);
-	      printf("◆");
-	    }
-	    
-	    Sleep(300);
-	    
-	    for(i=0;i<7;i++) // R
-	    {
-	      gotoxy(16,2+i);
-	      printf("◆");
-	      }
-	    for(i=0;i<6;i+=2)
-	    {
-	      gotoxy(18+i,2);
-	      printf("◆");
-	    }
-	    for(i=0;i<2;i++)
-	    {
-	      gotoxy(23,3+i);
-	      printf("◆");
-	    }
-	    for(i=0;i<6;i+=2)
-	    {
-	      gotoxy(22-i,5);
-	      printf("◆");
-	    }
-	    for(i=0;i<3;i++)
-	    {
-	      gotoxy(23+i,6+i);
-	      printf("◆");
-	    } 
-	    
-	    for(i=0; i<10; i+=2) //Z
-	      {
-	      	gotoxy(41+i,2);
-	      	printf("◆");
-		  }
-		  
-		  for(i=0; i<5; i++)
-	      {
-	      	gotoxy(47-i,3+i);
-	      	printf("◆");
-		  }
-		  
-		  for(i=0; i<10; i+=2)
-	      {
-	      	gotoxy(41+i,8);
-	      	printf("◆");
-		  }
-		  
-		  Sleep(300);
-		
-		 for(i=0;i<8;i+=2) // C
-	    {
-	      gotoxy(12-i,2);
-	      printf("◆");
-	    }
-	    for(i=0;i<1;i++)
-	    {
-	      gotoxy(4,3);
-	      printf("◆");
-	      }
-	    for(i=0;i<3;i++)
-	    {
-	      gotoxy(3,4+i);
-	      printf("◆");
-	      }
-	    for(i=0;i<1;i++)
-	    {
-	      gotoxy(4,7);
-	      printf("◆");
-	      }
-	    for(i=0;i<8;i+=2) 
-	    {
-	      gotoxy(6+i,8);
-	      printf("◆");
-	  }
-	       
-		  for(i=0;i<4;i++) // Y
-	    {
-	      gotoxy(53+i,2+i);
-	      printf("◆");
-	      }
-	    for(i=0;i<4;i++)
-	    {
-	      gotoxy(61-i,2+i);
-	      printf("◆");
-	      }
-	    for(i=0;i<3;i++)
-	    {
-	      gotoxy(57,6+i);
-	      printf("◆");
-	    }
-    
+		{
+			gotoxy(33,2);
+			printf("◆");
+		}
+		for(i=0;i<4;i++)
+		{
+			gotoxy(32-i,3+i);
+			printf("◆");
+		}
+		for(i=0;i<2;i++)
+		{
+			gotoxy(29,7+i);
+			printf("◆");
+		}
+		for(i=0;i<4;i++)
+		{
+			gotoxy(34+i,3+i);
+			printf("◆");
+		}
+		for(i=0;i<2;i++)
+		{
+			gotoxy(37,7+i);
+			printf("◆");
+		}
+		for(i=0;i<5;i+=2)
+		{
+			gotoxy(31+i,6);
+			printf("◆");
+		}
+
+		Sleep(300);
+
+		for(i=0;i<7;i++) // R
+		{
+			gotoxy(16,2+i);
+			printf("◆");
+		}
+		for(i=0;i<6;i+=2)
+		{
+			gotoxy(18+i,2);
+			printf("◆");
+		}
+		for(i=0;i<2;i++)
+		{
+			gotoxy(23,3+i);
+			printf("◆");
+		}
+		for(i=0;i<6;i+=2)
+		{
+			gotoxy(22-i,5);
+			printf("◆");
+		}
+		for(i=0;i<3;i++)
+		{
+			gotoxy(23+i,6+i);
+			printf("◆");
+		} 
+
+		for(i=0; i<10; i+=2) //Z
+		{
+			gotoxy(41+i,2);
+			printf("◆");
+		}
+
+		for(i=0; i<5; i++)
+		{
+			gotoxy(47-i,3+i);
+			printf("◆");
+		}
+
+		for(i=0; i<10; i+=2)
+		{
+			gotoxy(41+i,8);
+			printf("◆");
+		}
+
+		Sleep(300);
+
+		for(i=0;i<8;i+=2) // C
+		{
+			gotoxy(12-i,2);
+			printf("◆");
+		}
+		for(i=0;i<1;i++)
+		{
+			gotoxy(4,3);
+			printf("◆");
+		}
+		for(i=0;i<3;i++)
+		{
+			gotoxy(3,4+i);
+			printf("◆");
+		}
+		for(i=0;i<1;i++)
+		{
+			gotoxy(4,7);
+			printf("◆");
+		}
+		for(i=0;i<8;i+=2) 
+		{
+			gotoxy(6+i,8);
+			printf("◆");
+		}
+
+		for(i=0;i<4;i++) // Y
+		{
+			gotoxy(53+i,2+i);
+			printf("◆");
+		}
+		for(i=0;i<4;i++)
+		{
+			gotoxy(61-i,2+i);
+			printf("◆");
+		}
+		for(i=0;i<3;i++)
+		{
+			gotoxy(57,6+i);
+			printf("◆");
+		}
+
 	}
 }
 
 void gotoxy(int x, int y)
 {
-  COORD Pos = { x-1, y-1 };
-  SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
+	COORD Pos = { x-1, y-1 };
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
 }
 void textcolor(int color)
 {
-  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
