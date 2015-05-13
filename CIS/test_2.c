@@ -53,15 +53,10 @@ move_bullet();
 timer++;
 }
 */
-int swap(int *before,int *after)
-{
-	int temp;
-	temp=*before;
-	*before=*after;
-	*after=temp;
-}
+
 struct player
 {
+    char orign;
 	int bullet_count;
 	int heart;
 	int x,y;
@@ -99,6 +94,8 @@ void init()
 	p1.y=10;
 	p2.x=5;
 	p2.y=5;
+	p1.orign=GROUND;
+    p2.orign=GROUND; 
 }
 
 void map_type() //?? ????
@@ -181,7 +178,8 @@ int map_select() // ?? ????
 
 	}
 }
-
+//총알 구조체(위치,이동,스피드,)한발씩 
+//총알 입력키 선택 
 const char *get_shape(char code)
 {
 	if(code==GROUND)
@@ -190,6 +188,10 @@ const char *get_shape(char code)
 		return "□";
 	else if(code==GRASS)
 		return "♧";
+	else if(code==PLAYER_P1)
+    	return "●";
+	else if(code==PLAYER_P2) 
+    	return "○";
 }
 
 int get_x(int x)
@@ -199,6 +201,11 @@ int get_x(int x)
 int get_y(int y)
 {
 	return BASE+y*YSI;
+}
+void gaming_print_map(int y,int x)
+{
+    gotoxy(get_x(x),get_y(y) );
+	printf("%s",get_shape(map[y][x]));
 }
 void print_map(int num)
 {
@@ -221,15 +228,11 @@ void print_map(int num)
 	{
 		for(int j=0;j<GARO;j++)
 		{
-			gotoxy(get_x(j),get_y(i) );
-			printf("%s",get_shape(map[i][j]));
+			gaming_print_map(i,j);
 		}
 	}
 }
-void gaming_print_map(int y,int x)
-{
-	printf("%s",get_shape(map[y][x]));
-}
+
 void game_start()
 {
 	system("cls");					//게임 시작전 화면 초기화 
@@ -239,8 +242,7 @@ void game_start()
 	init();
 
 	print_map(map_select());  //현준이 메뉴이동을 리턴값으로 수정 요망  
-	gotoxy(get_x(1),get_y(SERO-2));
-	printf("●");
+
 	while(1) //개임 시작중  
 	{
 		//print_status();
@@ -248,111 +250,66 @@ void game_start()
 		//print_player();
 		//print_potion();              //시간조건필요  
 
-		while (kbhit()) 
+		if (kbhit()) 
 		{   //키 받기 
 			//gotoxy(get_x(p1.x),get_y(p1.y));
 			//printf("%s",get_shape(GROUND));
+			
 			c=getch();
 			if(c==UP)
 			{
-				if(map[p1.y][p1.x]==GROUND && map[p1.y-1][p1.x]==GROUND0 || map[p1.y][p1.x]==GRASS && map[p1.y-1][p1.x]==GRASS)
+				if(map[p1.y-1][p1.x]==GROUND || map[p1.y-1][p1.x]==GRASS)
 				{
-					swap(&map[p1.y-1][p1.x],&map[p1.y][p1.x]);
-					map[p1.y-1][p1.x]=PLAYER_P1;
+                    map[p1.y][p1.x]=p1.orign;
+                    gaming_print_map(p1.y,p1.x);
+                    p1.orign=map[p1.y-1][p1.x];
 					--p1.y;
+					map[p1.y][p1.x]=PLAYER_P1;
+					if(p1.orign!=GRASS) gaming_print_map(p1.y,p1.x);
 				}
-				else if(map[p1.y][p1.x]==GROUND && map[p1.y-1][p1.x]==GRASS)
-				{
-					map[p1.y-1][p1.x]=GRASS;
-					map[p1.y][p1.x]=GROUND;
-					--p1.y;
-				}
-				else if(map[p1.y][p1.x]==GRASS && map[p1.y-1][p1.x]==GROUND)
-				{
-					map[p1.y-1][p1.x]=PLAYER_P1;
-					map[p1.y][p1.x]=GRASS;
-					--p1.y;
-				}
-
-				gaming_print_map(p1.y,p1.x);
-				gaming_print_map(p1.y-1,p1.x);
+				
 
 			}
 			else if(c==DOWN)
 			{
-				if(map[p1.y][p1.x]==GROUND && map[p1.y+1][p1.x]==GROUND || map[p1.y][p1.x]==GRASS && map[p1.y+1][p1.x]==GRASS)
+				if(map[p1.y+1][p1.x]==GROUND ||   map[p1.y+1][p1.x]==GRASS)
 				{
-					swap(&map[p1.y+1][p1.x],&map[p1.y][p1.x]);
-					map[p1.y+1][p1.x]=PLAYER_P1;
+					map[p1.y][p1.x]=p1.orign;
+					gaming_print_map(p1.y,p1.x);
+					p1.orign=map[p1.y+1][p1.x];
 					++p1.y;
+					map[p1.y][p1.x]=PLAYER_P1;
+					if(p1.orign!=GRASS) gaming_print_map(p1.y,p1.x);
 				}
-				else if(map[p1.y][p1.x]==GROUND && map[p1.y+1][p1.x]==GRASS)
-				{
-					map[p1.y+1][p1.x]=GRASS;
-					map[p1.y][p1.x]=GROUND;
-					++p1.y;
-				}
-				else if(map[p1.y][p1.x]==GRASS && map[p1.y+1][p1.x]==GROUND)
-				{
-					map[p1.y+1][p1.x]=PLAYER_P1;
-					map[p1.y][p1.x]=GRASS;
-					++p1.y;
-				}
-
-				gaming_print_map(p1.y,p1.x);
-				gaming_print_map(p1.y+1,p1.x);
+				
 			}
 			else if(c==RIGHT)
 			{
 
-				if(map[p1.y][p1.x]==GROUND && map[p1.y][p1.x+1]==GROUND || map[p1.y][p1.x]==GRASS && map[p1.y][p1.x+1]==GRASS)
+				if(map[p1.y][p1.x+1]==GROUND ||  map[p1.y][p1.x+1]==GRASS)
 				{
-					swap(&map[p1.y][p1.x+1],&map[p1.y][p1.x]);
-					map[p1.y][p1.x+1]=PLAYER_P1;
+					map[p1.y][p1.x]=p1.orign;
+					gaming_print_map(p1.y,p1.x);
+                    p1.orign=map[p1.y][p1.x+1];
 					++p1.x;
+					map[p1.y][p1.x]=PLAYER_P1;
+					if(p1.orign!=GRASS) gaming_print_map(p1.y,p1.x);
 				}
-				else if(map[p1.y][p1.x]==GROUND && map[p1.y][p1.x+1]==GRASS)
-				{
-					map[p1.y][p1.x+1]=GRASS;
-					map[p1.y][p1.x]=GROUND;
-					++p1.x;
-				}
-				else if(map[p1.y][p1.x]==GRASS && map[p1.y][p1.x+1]==GROUND)
-				{
-					map[p1.y][p1.x+1]=PLAYER_P1;
-					map[p1.y][p1.x]=GRASS;
-					++p1.x;
-				}
-
-				gaming_print_map(p1.y,p1.x);
-				gaming_print_map(p1.y,p1.x+1);
+				
 			}
 			else if(c==LEFT)
 			{
-				if(map[p1.y][p1.x]==GROUND && map[p1.y][p1.x-1]==GROUND || map[p1.y][p1.x]==GRASS && map[p1.y][p1.x-1]==GRASS)
+				if( map[p1.y][p1.x-1]==GROUND ||  map[p1.y][p1.x-1]==GRASS)
 				{
-					swap(&map[p1.y][p1.x-1],&map[p1.y][p1.x]);
-					map[p1.y][p1.x-1]=PLAYER_P1;
+					map[p1.y][p1.x]=p1.orign;
+					gaming_print_map(p1.y,p1.x);
+                    p1.orign=map[p1.y][p1.x-1];
 					--p1.x;
+					map[p1.y][p1.x]=PLAYER_P1;
+					if(p1.orign!=GRASS) gaming_print_map(p1.y,p1.x);
 				}
-				else if(map[p1.y][p1.x]==GROUND && map[p1.y][p1.x-1]==GRASS)
-				{
-					map[p1.y][p1.x-1]=GRASS;
-					map[p1.y][p1.x]=GROUND;
-					--p1.x;
-				}
-				else if(map[p1.y][p1.x]==GRASS && map[p1.y][p1.x-1]==GROUND)
-				{
-					map[p1.y][p1.x-1]=PLAYER_P1;
-					map[p1.y][p1.x]=GRASS;
-					--p1.x;
-				}
-
-				gaming_print_map(p1.y,p1.x);
-				gaming_print_map(p1.y,p1.x-1);
+				
 			}
-			gotoxy(get_x(p1.x),get_y(p1.y));
-			printf("●");
 		}
 	}
 }
