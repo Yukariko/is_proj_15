@@ -239,7 +239,8 @@ void game_start()
 	init();
 	
 	print_map(map_select());  //현준이 메뉴이동을 리턴값으로 수정 요망  
-	
+	gotoxy(get_x(1),get_y(SERO-2));
+	printf("●");
 	while(1) //개임 시작중  
 	{
 		//print_status();
@@ -249,8 +250,8 @@ void game_start()
 
 		while (kbhit()) 
 		{   //키 받기 
-			gotoxy(get_x(p1.x),get_y(p1.y));
-			printf("%s",get_shape(GROUND));
+			//gotoxy(get_x(p1.x),get_y(p1.y));
+			//printf("%s",get_shape(GROUND));
 			c=getch();
 			if(c==UP)
 			{
