@@ -4,18 +4,18 @@
 #include <windows.h>
 #include <time.h>
 
-#define LEFT 75
-#define RIGHT 77
-#define P1_UP 72
-#define DOWN 80
+#define P1_LEFT 97
+#define P1_RIGHT 100
+#define P1_UP 119
+#define P1_DOWN 115
 #define SPACE 32
 #define ENTER 13
 #define HP 5
 #define bullet 50
-#define p2_LEFT 97
-#define p2_RIGHT 100
-#define p2_UP 119
-#define p2_DOWN 115
+#define P2_LEFT 75
+#define P2_RIGHT 77
+#define P2_UP 72
+#define P2_DOWN 80
 #define SERO 16
 #define GARO 24
 #define GROUND 0
@@ -117,11 +117,11 @@ int map_select() // ?? ????
 		if(kbhit())
 		{
 			key = getch();
-			if(key == LEFT)
+			if(key == P2_LEFT)
 			{
 				menu = menu? menu-1 : 2;
 			}
-			else if(key == RIGHT)
+			else if(key == P2_RIGHT)
 			{
 				menu = (menu + 1) % 3;
 			}
@@ -255,7 +255,7 @@ void game_start()
 			//printf("%s",get_shape(GROUND));
 			
 			c=getch();
-			if(c==UP)
+			if(c==P1_UP)
 			{
 				if(map[p1.y-1][p1.x]==GROUND || map[p1.y-1][p1.x]==GRASS)
 				{
@@ -269,7 +269,7 @@ void game_start()
 				
 
 			}
-			else if(c==DOWN)
+			else if(c==P1_DOWN)
 			{
 				if(map[p1.y+1][p1.x]==GROUND ||   map[p1.y+1][p1.x]==GRASS)
 				{
@@ -282,7 +282,7 @@ void game_start()
 				}
 				
 			}
-			else if(c==RIGHT)
+			else if(c==P1_RIGHT)
 			{
 
 				if(map[p1.y][p1.x+1]==GROUND ||  map[p1.y][p1.x+1]==GRASS)
@@ -296,7 +296,7 @@ void game_start()
 				}
 				
 			}
-			else if(c==LEFT)
+			else if(c==P1_LEFT)
 			{
 				if( map[p1.y][p1.x-1]==GROUND ||  map[p1.y][p1.x-1]==GRASS)
 				{
@@ -309,57 +309,57 @@ void game_start()
 				}
 				
 			}
-			if(c==UP)
+			if(c==P2_UP)
 			{
-				if(map[p1.y-1][p1.x]==GROUND || map[p1.y-1][p1.x]==GRASS)
+				if(map[p2.y-1][p2.x]==GROUND || map[p2.y-1][p2.x]==GRASS)
 				{
-                    map[p1.y][p1.x]=p1.orign;
-                    gaming_print_map(p1.y,p1.x);
-                    p1.orign=map[p1.y-1][p1.x];
-					--p1.y;
-					map[p1.y][p1.x]=PLAYER_P1;
-					if(p1.orign!=GRASS) gaming_print_map(p1.y,p1.x);
+                    map[p2.y][p2.x]=p2.orign;
+                    gaming_print_map(p2.y,p2.x);
+                    p2.orign=map[p2.y-1][p2.x];
+					--p2.y;
+					map[p2.y][p2.x]=PLAYER_P2;
+					if(p2.orign!=GRASS) gaming_print_map(p2.y,p2.x);
 				}
 				
 
 			}
-			else if(c==DOWN)
+			else if(c==P2_DOWN)
 			{
-				if(map[p1.y+1][p1.x]==GROUND ||   map[p1.y+1][p1.x]==GRASS)
+				if(map[p2.y+1][p2.x]==GROUND ||   map[p2.y+1][p2.x]==GRASS)
 				{
-					map[p1.y][p1.x]=p1.orign;
-					gaming_print_map(p1.y,p1.x);
-					p1.orign=map[p1.y+1][p1.x];
-					++p1.y;
-					map[p1.y][p1.x]=PLAYER_P1;
-					if(p1.orign!=GRASS) gaming_print_map(p1.y,p1.x);
+					map[p2.y][p2.x]=p2.orign;
+					gaming_print_map(p2.y,p2.x);
+					p2.orign=map[p2.y+1][p2.x];
+					++p2.y;
+					map[p2.y][p2.x]=PLAYER_P2;
+					if(p2.orign!=GRASS) gaming_print_map(p2.y,p2.x);
 				}
 				
 			}
-			else if(c==RIGHT)
+			else if(c==P2_RIGHT)
 			{
 
-				if(map[p1.y][p1.x+1]==GROUND ||  map[p1.y][p1.x+1]==GRASS)
+				if(map[p2.y][p2.x+1]==GROUND ||  map[p2.y][p2.x+1]==GRASS)
 				{
-					map[p1.y][p1.x]=p1.orign;
-					gaming_print_map(p1.y,p1.x);
-                    p1.orign=map[p1.y][p1.x+1];
-					++p1.x;
-					map[p1.y][p1.x]=PLAYER_P1;
-					if(p1.orign!=GRASS) gaming_print_map(p1.y,p1.x);
+					map[p2.y][p2.x]=p2.orign;
+					gaming_print_map(p2.y,p2.x);
+                    p2.orign=map[p2.y][p2.x+1];
+					++p2.x;
+					map[p2.y][p2.x]=PLAYER_P2;
+					if(p2.orign!=GRASS) gaming_print_map(p2.y,p2.x);
 				}
 				
 			}
-			else if(c==LEFT)
+			else if(c==P2_LEFT)
 			{
-				if( map[p1.y][p1.x-1]==GROUND ||  map[p1.y][p1.x-1]==GRASS)
+				if( map[p2.y][p2.x-1]==GROUND ||  map[p2.y][p2.x-1]==GRASS)
 				{
-					map[p1.y][p1.x]=p1.orign;
-					gaming_print_map(p1.y,p1.x);
-                    p1.orign=map[p1.y][p1.x-1];
-					--p1.x;
-					map[p1.y][p1.x]=PLAYER_P1;
-					if(p1.orign!=GRASS) gaming_print_map(p1.y,p1.x);
+					map[p2.y][p2.x]=p2.orign;
+					gaming_print_map(p2.y,p2.x);
+                    p2.orign=map[p2.y][p2.x-1];
+					--p2.x;
+					map[p2.y][p2.x]=PLAYER_P2;
+					if(p2.orign!=GRASS) gaming_print_map(p2.y,p2.x);
 				}
 				
 			}
