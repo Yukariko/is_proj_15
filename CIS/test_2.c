@@ -6,7 +6,7 @@
 
 #define LEFT 75
 #define RIGHT 77
-#define UP 72
+#define P1_UP 72
 #define DOWN 80
 #define SPACE 32
 #define ENTER 13
@@ -178,7 +178,7 @@ int map_select() // ?? ????
 
 	}
 }
-//총알 구조체(위치,이동,스피드,)한발씩 
+//총알 구조체(원래위치,이동,스피드,)한발씩 
 //총알 입력키 선택 
 const char *get_shape(char code)
 {
@@ -193,7 +193,6 @@ const char *get_shape(char code)
 	else if(code==PLAYER_P2) 
     	return "○";
 }
-
 int get_x(int x)
 {
 	return BASE+x*XSI;
@@ -256,6 +255,60 @@ void game_start()
 			//printf("%s",get_shape(GROUND));
 			
 			c=getch();
+			if(c==UP)
+			{
+				if(map[p1.y-1][p1.x]==GROUND || map[p1.y-1][p1.x]==GRASS)
+				{
+                    map[p1.y][p1.x]=p1.orign;
+                    gaming_print_map(p1.y,p1.x);
+                    p1.orign=map[p1.y-1][p1.x];
+					--p1.y;
+					map[p1.y][p1.x]=PLAYER_P1;
+					if(p1.orign!=GRASS) gaming_print_map(p1.y,p1.x);
+				}
+				
+
+			}
+			else if(c==DOWN)
+			{
+				if(map[p1.y+1][p1.x]==GROUND ||   map[p1.y+1][p1.x]==GRASS)
+				{
+					map[p1.y][p1.x]=p1.orign;
+					gaming_print_map(p1.y,p1.x);
+					p1.orign=map[p1.y+1][p1.x];
+					++p1.y;
+					map[p1.y][p1.x]=PLAYER_P1;
+					if(p1.orign!=GRASS) gaming_print_map(p1.y,p1.x);
+				}
+				
+			}
+			else if(c==RIGHT)
+			{
+
+				if(map[p1.y][p1.x+1]==GROUND ||  map[p1.y][p1.x+1]==GRASS)
+				{
+					map[p1.y][p1.x]=p1.orign;
+					gaming_print_map(p1.y,p1.x);
+                    p1.orign=map[p1.y][p1.x+1];
+					++p1.x;
+					map[p1.y][p1.x]=PLAYER_P1;
+					if(p1.orign!=GRASS) gaming_print_map(p1.y,p1.x);
+				}
+				
+			}
+			else if(c==LEFT)
+			{
+				if( map[p1.y][p1.x-1]==GROUND ||  map[p1.y][p1.x-1]==GRASS)
+				{
+					map[p1.y][p1.x]=p1.orign;
+					gaming_print_map(p1.y,p1.x);
+                    p1.orign=map[p1.y][p1.x-1];
+					--p1.x;
+					map[p1.y][p1.x]=PLAYER_P1;
+					if(p1.orign!=GRASS) gaming_print_map(p1.y,p1.x);
+				}
+				
+			}
 			if(c==UP)
 			{
 				if(map[p1.y-1][p1.x]==GROUND || map[p1.y-1][p1.x]==GRASS)
