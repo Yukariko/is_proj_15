@@ -255,19 +255,19 @@ void game_start()
 			c=getch();
 			if(c==UP)
 			{
-				if(map[p1.y][p1.x]==0 && map[p1.y-1][p1.x]==0 || map[p1.y][p1.x]==5 && map[p1.y-1][p1.x]==5)
+				if(map[p1.y][p1.x]==GROUND && map[p1.y-1][p1.x]==GROUND0 || map[p1.y][p1.x]==GRASS && map[p1.y-1][p1.x]==GRASS)
 				{
 					swap(&map[p1.y-1][p1.x],&map[p1.y][p1.x]);
 				 	map[p1.y-1][p1.x]=PLAYER_P1;
 					 --p1.y;
 				}
-				else if(map[p1.y][p1.x]==0 && map[p1.y-1][p1.x]==5)
+				else if(map[p1.y][p1.x]==GROUND && map[p1.y-1][p1.x]==GRASS)
 				{
 				 	map[p1.y-1][p1.x]=GRASS;
 					map[p1.y][p1.x]=GROUND;
 					 --p1.y;
 				}
-				else if(map[p1.y][p1.x]==5 && map[p1.y-1][p1.x]==0)
+				else if(map[p1.y][p1.x]==GRASS && map[p1.y-1][p1.x]==GROUND)
 				{
 				 	map[p1.y-1][p1.x]=PLAYER_P1;
 					map[p1.y][p1.x]=GRASS;
@@ -280,19 +280,19 @@ void game_start()
 			}
 			else if(c==DOWN)
 			{
-					if(map[p1.y][p1.x]==0 && map[p1.y+1][p1.x]==0 || map[p1.y][p1.x]==5 && map[p1.y+1][p1.x]==5)
+					if(map[p1.y][p1.x]==GROUND && map[p1.y+1][p1.x]==GROUND || map[p1.y][p1.x]==GRASS && map[p1.y+1][p1.x]==GRASS)
 				{
 					swap(&map[p1.y+1][p1.x],&map[p1.y][p1.x]);
 				 	map[p1.y+1][p1.x]=PLAYER_P1;
 					 ++p1.y;
 				}
-				else if(map[p1.y][p1.x]==0 && map[p1.y+1][p1.x]==5)
+				else if(map[p1.y][p1.x]==GROUND && map[p1.y+1][p1.x]==GRASS)
 				{
 				 	map[p1.y+1][p1.x]=GRASS;
 					map[p1.y][p1.x]=GROUND;
 					 ++p1.y;
 				}
-				else if(map[p1.y][p1.x]==5 && map[p1.y+1][p1.x]==0)
+				else if(map[p1.y][p1.x]==GRASS && map[p1.y+1][p1.x]==GROUND)
 				{
 				 	map[p1.y+1][p1.x]=PLAYER_P1;
 					map[p1.y][p1.x]=GRASS;
@@ -305,19 +305,19 @@ void game_start()
 			else if(c==RIGHT)
 			{
 			
-					if(map[p1.y][p1.x]==0 && map[p1.y][p1.x+1]==0 || map[p1.y][p1.x]==5 && map[p1.y][p1.x+1]==5)
+					if(map[p1.y][p1.x]==GROUND && map[p1.y][p1.x+1]==GROUND || map[p1.y][p1.x]==GRASS && map[p1.y][p1.x+1]==GRASS)
 				{
 					swap(&map[p1.y][p1.x+1],&map[p1.y][p1.x]);
 				 	map[p1.y][p1.x+1]=PLAYER_P1;
 					 ++p1.x;
 				}
-				else if(map[p1.y][p1.x]==0 && map[p1.y][p1.x+1]==5)
+				else if(map[p1.y][p1.x]==GROUND && map[p1.y][p1.x+1]==GRASS)
 				{
 				 	map[p1.y][p1.x+1]=GRASS;
 					map[p1.y][p1.x]=GROUND;
 					 ++p1.x;
 				}
-				else if(map[p1.y][p1.x]==5 && map[p1.y][p1.x+1]==0)
+				else if(map[p1.y][p1.x]==GRASS && map[p1.y][p1.x+1]==GROUND)
 				{
 				 	map[p1.y][p1.x+1]=PLAYER_P1;
 					map[p1.y][p1.x]=GRASS;
@@ -329,19 +329,19 @@ void game_start()
 			}
 			else if(c==LEFT)
 			{
-				if(map[p1.y][p1.x]==0 && map[p1.y][p1.x-1]==0 || map[p1.y][p1.x]==5 && map[p1.y][p1.x-1]==5)
+				if(map[p1.y][p1.x]==GROUND && map[p1.y][p1.x-1]==GROUND || map[p1.y][p1.x]==GRASS && map[p1.y][p1.x-1]==GRASS)
 				{
 					swap(&map[p1.y][p1.x-1],&map[p1.y][p1.x]);
 				 	map[p1.y][p1.x-1]=PLAYER_P1;
 					 --p1.x;
 				}
-				else if(map[p1.y][p1.x]==0 && map[p1.y][p1.x-1]==5)
+				else if(map[p1.y][p1.x]==GROUND && map[p1.y][p1.x-1]==GRASS)
 				{
 				 	map[p1.y][p1.x-1]=GRASS;
 					map[p1.y][p1.x]=GROUND;
 					 --p1.x;
 				}
-				else if(map[p1.y][p1.x]==5 && map[p1.y][p1.x-1]==0)
+				else if(map[p1.y][p1.x]==GRASS && map[p1.y][p1.x-1]==GROUND)
 				{
 				 	map[p1.y][p1.x-1]=PLAYER_P1;
 					map[p1.y][p1.x]=GRASS;
