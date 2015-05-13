@@ -242,13 +242,13 @@ void game_start()
 	
 	while(1) //개임 시작중  
 	{
-	//print_status();
-	//print_monster();             //시간조건필요 
-	//print_player();
-	//print_potion();              //시간조건필요  
-	
-	while (kbhit()) 
-	{   //키 받기 
+		//print_status();
+		//print_monster();             //시간조건필요 
+		//print_player();
+		//print_potion();              //시간조건필요  
+
+		while (kbhit()) 
+		{   //키 받기 
 			gotoxy(get_x(p1.x),get_y(p1.y));
 			printf("%s",get_shape(GROUND));
 			c=getch();
@@ -262,7 +262,7 @@ void game_start()
 				}
 				else if(map[p1.y][p1.x]==0 && map[p1.y-1][p1.x]==5)
 				{
-				 	map[p1.y-1][p1.x]=PLAYER_P1;
+				 	map[p1.y-1][p1.x]=GRASS;
 					map[p1.y][p1.x]=GROUND;
 					 --p1.y;
 				}
@@ -282,12 +282,12 @@ void game_start()
 					if(map[p1.y][p1.x]==0 && map[p1.y+1][p1.x]==0 || map[p1.y][p1.x]==5 && map[p1.y+1][p1.x]==5)
 				{
 					swap(&map[p1.y+1][p1.x],&map[p1.y][p1.x]);
-				 	map[p1.y-1][p1.x]=PLAYER_P1;
+				 	map[p1.y+1][p1.x]=PLAYER_P1;
 					 ++p1.y;
 				}
 				else if(map[p1.y][p1.x]==0 && map[p1.y+1][p1.x]==5)
 				{
-				 	map[p1.y+1][p1.x]=PLAYER_P1;
+				 	map[p1.y+1][p1.x]=GRASS;
 					map[p1.y][p1.x]=GROUND;
 					 ++p1.y;
 				}
@@ -312,7 +312,7 @@ void game_start()
 				}
 				else if(map[p1.y][p1.x]==0 && map[p1.y][p1.x+1]==5)
 				{
-				 	map[p1.y][p1.x+1]=PLAYER_P1;
+				 	map[p1.y][p1.x+1]=GRASS;
 					map[p1.y][p1.x]=GROUND;
 					 ++p1.x;
 				}
@@ -336,7 +336,7 @@ void game_start()
 				}
 				else if(map[p1.y][p1.x]==0 && map[p1.y][p1.x-1]==5)
 				{
-				 	map[p1.y][p1.x-1]=PLAYER_P1;
+				 	map[p1.y][p1.x-1]=GRASS;
 					map[p1.y][p1.x]=GROUND;
 					 --p1.x;
 				}
