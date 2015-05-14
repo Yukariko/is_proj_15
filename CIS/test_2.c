@@ -29,6 +29,16 @@
 #define YSI 1
 #define PLAYER_P1 20
 #define PLAYER_P2 21
+#define BULLET_P1_UP 104
+#define BULLET_P1_DOWN 110
+#define BULLET_P1_RIGHT 109
+#define BULLET_P1_LEFT 98
+#define BULLET_P2_UP 56
+#define BULLET_P2_DOWN 50
+#define BULLET_P2_RIGHT 54
+#define BULLET_P2_LEFT 52
+
+
 
 /*
 Sleep(1000); // 1 √ 
@@ -85,15 +95,22 @@ int main()
 	end();
 	return 0;
 }
-
+int get_x(int x)
+{
+	return BASE+x*XSI;
+}
+int get_y(int y)
+{
+	return BASE+y*YSI;
+}
 void init()
 {
 	p1.heart=5;
 	p2.heart=5;
-	p1.x=10;
-	p1.y=10;
-	p2.x=5;
-	p2.y=5;
+	p1.x=2;
+	p1.y=14;
+	p2.x=22;
+	p2.y=1;
 	p1.orign=GROUND;
     p2.orign=GROUND; 
 }
@@ -193,14 +210,7 @@ const char *get_shape(char code)
 	else if(code==PLAYER_P2) 
     	return "°€";
 }
-int get_x(int x)
-{
-	return BASE+x*XSI;
-}
-int get_y(int y)
-{
-	return BASE+y*YSI;
-}
+
 void gaming_print_map(int y,int x)
 {
     gotoxy(get_x(x),get_y(y) );
