@@ -83,8 +83,15 @@ void map_type();
 void print_map(int num);
 const char *get_shape(char code);
 
+HANDLE H;
+
 int main()
 {
+	H = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO CurInfo;
+  CurInfo.bVisible = FALSE;
+  SetConsoleCursorInfo(H, &CurInfo);
+
 	//start();
 	game_start();
 	end();
@@ -231,7 +238,9 @@ void print_map(int num)
 void gaming_print_map(int y,int x)
 {
 	gotoxy(get_x(x), get_y(y));
-	printf("%s",get_shape(map[y][x]));
+	const char *shape = get_shape(map[y][x]);
+	putchar(shape[0]);
+	putchar(shape[1]);
 }
 void game_start()
 {
@@ -242,8 +251,7 @@ void game_start()
 	init();
 	
 	print_map(map_select());  //현준이 메뉴이동을 리턴값으로 수정 요망  
-	gotoxy(get_x(1),get_y(SERO-2));
-	printf("●");
+
 	while(1) //개임 시작중  
 	{
 		//print_status();
@@ -258,103 +266,92 @@ void game_start()
 			c=getch();
 			if(c==UP)
 			{
-				if(map[p1.y][p1.x]==0 && map[p1.y-1][p1.x]==0 || map[p1.y][p1.x]==5 && map[p1.y-1][p1.x]==5)
+				if(map[p1.y-1][p1.x]==0 || map[p1.y-1][p1.x]==5)
 				{
 					swap(&map[p1.y-1][p1.x],&map[p1.y][p1.x]);
 				 	map[p1.y-1][p1.x]=PLAYER_P1;
 					 --p1.y;
 				}
-				else if(map[p1.y][p1.x]==0 && map[p1.y-1][p1.x]==5)
+				else if(map[p1.y-1][p1.x]==5)
 				{
 				 	map[p1.y-1][p1.x]=GRASS;
 					map[p1.y][p1.x]=GROUND;
 					 --p1.y;
 				}
-				else if(map[p1.y][p1.x]==5 && map[p1.y-1][p1.x]==0)
+				else if(map[p1.y-1][p1.x]==0)
 				{
 				 	map[p1.y-1][p1.x]=PLAYER_P1;
 					map[p1.y][p1.x]=GRASS;
 					 --p1.y;
-				}
-				 
-			gaming_print_map(p1.y,p1.x);
-			gaming_print_map(p1.y-1,p1.x);
-				
+				}				
 			}
 			else if(c==DOWN)
 			{
-					if(map[p1.y][p1.x]==0 && map[p1.y+1][p1.x]==0 || map[p1.y][p1.x]==5 && map[p1.y+1][p1.x]==5)
+				if(map[p1.y+1][p1.x]==0 || map[p1.y+1][p1.x]==5)
 				{
 					swap(&map[p1.y+1][p1.x],&map[p1.y][p1.x]);
 				 	map[p1.y+1][p1.x]=PLAYER_P1;
 					 ++p1.y;
 				}
-				else if(map[p1.y][p1.x]==0 && map[p1.y+1][p1.x]==5)
+				else if(map[p1.y+1][p1.x]==5)
 				{
 				 	map[p1.y+1][p1.x]=GRASS;
 					map[p1.y][p1.x]=GROUND;
 					 ++p1.y;
 				}
-				else if(map[p1.y][p1.x]==5 && map[p1.y+1][p1.x]==0)
+				else if(map[p1.y+1][p1.x]==0)
 				{
 				 	map[p1.y+1][p1.x]=PLAYER_P1;
 					map[p1.y][p1.x]=GRASS;
 					 ++p1.y;
 				}
-				 
-			gaming_print_map(p1.y,p1.x);
-			gaming_print_map(p1.y+1,p1.x);
 			}
 			else if(c==RIGHT)
 			{
 			
-					if(map[p1.y][p1.x]==0 && map[p1.y][p1.x+1]==0 || map[p1.y][p1.x]==5 && map[p1.y][p1.x+1]==5)
+				if(map[p1.y][p1.x+1]==0 || map[p1.y][p1.x+1]==5)
 				{
 					swap(&map[p1.y][p1.x+1],&map[p1.y][p1.x]);
 				 	map[p1.y][p1.x+1]=PLAYER_P1;
 					 ++p1.x;
 				}
-				else if(map[p1.y][p1.x]==0 && map[p1.y][p1.x+1]==5)
+				else if(map[p1.y][p1.x+1]==5)
 				{
 				 	map[p1.y][p1.x+1]=GRASS;
 					map[p1.y][p1.x]=GROUND;
 					 ++p1.x;
 				}
-				else if(map[p1.y][p1.x]==5 && map[p1.y][p1.x+1]==0)
+				else if(map[p1.y][p1.x+1]==0)
 				{
 				 	map[p1.y][p1.x+1]=PLAYER_P1;
 					map[p1.y][p1.x]=GRASS;
 					 ++p1.x;
 				}
-				 
-			gaming_print_map(p1.y,p1.x);
-			gaming_print_map(p1.y,p1.x+1);
 			}
 			else if(c==LEFT)
 			{
-				if(map[p1.y][p1.x]==0 && map[p1.y][p1.x-1]==0 || map[p1.y][p1.x]==5 && map[p1.y][p1.x-1]==5)
+				if(map[p1.y][p1.x-1]==0 || map[p1.y][p1.x-1]==5)
 				{
 					swap(&map[p1.y][p1.x-1],&map[p1.y][p1.x]);
 				 	map[p1.y][p1.x-1]=PLAYER_P1;
 					 --p1.x;
 				}
-				else if(map[p1.y][p1.x]==0 && map[p1.y][p1.x-1]==5)
+				else if(map[p1.y][p1.x-1]==5)
 				{
 				 	map[p1.y][p1.x-1]=GRASS;
 					map[p1.y][p1.x]=GROUND;
 					 --p1.x;
 				}
-				else if(map[p1.y][p1.x]==5 && map[p1.y][p1.x-1]==0)
+				else if(map[p1.y][p1.x-1]==0)
 				{
 				 	map[p1.y][p1.x-1]=PLAYER_P1;
 					map[p1.y][p1.x]=GRASS;
 					 --p1.x;
 				}
-				 
-			gaming_print_map(p1.y,p1.x);
-			gaming_print_map(p1.y,p1.x-1);
 			}
+			gaming_print_map(p1.y,p1.x);
  		}
+ 		Sleep(100);
 	}
 }
 
@@ -1059,9 +1056,9 @@ void start()
 void gotoxy(int x, int y)
 {
   COORD Pos = { x-1, y-1 };
-  SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
+  SetConsoleCursorPosition(H, Pos);
 }
 void textcolor(int color)
 {
-  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+  SetConsoleTextAttribute(H, color);
 }
