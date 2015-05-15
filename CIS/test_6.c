@@ -450,7 +450,7 @@ void game_start() //게임 실행
 		if(bp1.on == 1 )
 		{
 			bp1.count++;
-			if(bp1.count==100)
+			if(bp1.count==1800)
 			{
 				bp1.count = 0;
 				if(bp1.vector==BULLET_P1_UP)
@@ -560,7 +560,7 @@ void game_start() //게임 실행
 		else if(bp2.on == 1) 
 		{
 			bp2.count++;
-			if(bp2.count==100)
+			if(bp2.count==1800)
 			{
 				bp2.count = 0;
 
@@ -622,18 +622,18 @@ void game_start() //게임 실행
 					else if(map[bp1.y][bp2.x-1]==GROUND || map[bp2.y][bp2.x-1]==GRASS)
 					{
 						bp2.origin=map[bp2.y][bp2.x-1];
-						--bp2.x;	
+						--bp2.x;							
 						map[bp2.y][bp2.x]=BULLET;
 						map[bp2.y][bp2.x+1]=bp2.origin;
-						gaming_print_map(bp2.y,bp2.x+1);
 						gaming_print_map(bp2.y,bp2.x);
-						if(map[bp2.y][bp2.x-1]==PLAYER_P1) 
+						gaming_print_map(bp2.y,bp2.x+1);
+						if(map[bp2.y][bp2.x-1]==PLAYER_P2)
 							end();
-						else if(map[bp1.y][bp1.x-1]==PLAYER_P2) 
+						else if(map[bp1.y][bp1.x-1]==PLAYER_P1) 
 							end();
 						else if(map[bp2.y][bp2.x-1]==BUILDING1)
 						{
-							bp2.on=0;
+							bp1.on=0;
 							map[bp2.y][bp2.x]=bp2.origin;
 							gaming_print_map(bp2.y,bp2.x);
 						}
