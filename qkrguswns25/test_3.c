@@ -29,16 +29,14 @@
 #define PLAYER_P1 20
 #define PLAYER_P2 21
 #define BULLET 13
-#define BULLET_P1 14
-#define BULLET_P2 15
-#define BULLET_P1_UP 104
-#define BULLET_P1_DOWN 110
-#define BULLET_P1_RIGHT 109
-#define BULLET_P1_LEFT 98
-#define BULLET_P2_UP 56
-#define BULLET_P2_DOWN 50
-#define BULLET_P2_RIGHT 54
-#define BULLET_P2_LEFT 52
+#define BULLET_P1_UP 104 //h
+#define BULLET_P1_DOWN 110 //n
+#define BULLET_P1_RIGHT 109 //m
+#define BULLET_P1_LEFT 98 //b
+#define BULLET_P2_UP 56 //8
+#define BULLET_P2_DOWN 50 //2
+#define BULLET_P2_RIGHT 54 //6
+#define BULLET_P2_LEFT 52 //4
 
 
 
@@ -77,7 +75,8 @@ struct player
 //ÃÑ¾Ë ÀÔ·ÂÅ° ¼±ÅÃ 
 struct bullet  //ÃÑ¾Ë
 {
-	char gps;
+	char origin;
+	
 
 };
 
@@ -123,6 +122,8 @@ void init()
 	p2.y=1;
 	p1.origin=GROUND;
     p2.origin=GROUND; 
+	bp1.origin=GROUND;
+	bp2.origin=GROUND;
 }
 
 void map_type() //?? ????
@@ -392,16 +393,15 @@ void game_start()
 			{
 				while(map[p1.y-1][p1.x]!=BUILDING1)
 				{
-					bp1.gps=map[p1.y][p1.x];
-					gaming_print_map(p1.y,p1.x);
-					bp1.gps=map[p1.y-1][p1.x];
+					map[p1.y][p1.x]=PLAYER_P1;
+					//	gaming_print_map(p1.y,p1.x);
+					bp1.origin=map[p1.y-1][p1.x];
+
 					--p1.y;
-					map[p1.y][p1.x]=BULLET_P1;
-					if(bp1.gps!=GRASS) 
-					{
-						gotoxy(get_x(p1.x),get_y(p1.y) );
-						printf("%s",get_shape(BULLET));
-					}
+					map[p1.y][p1.x]=BULLET;
+
+					if(bp1.origin!=GRASS) 
+						gaming_print_map(p1.y,p1.x);
 				}
 			}
 			else if(c==BULLET_P1_DOWN)
