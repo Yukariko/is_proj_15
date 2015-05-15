@@ -63,7 +63,6 @@ move_bullet();
 timer++;
 }
 */
-
 struct player
 {
     char origin;
@@ -76,7 +75,7 @@ struct player
 struct bullet  //ÃÑ¾Ë
 {
 	char origin;
-	
+	int x,y;
 
 };
 
@@ -281,7 +280,7 @@ void game_start()
 			{
 				if(map[p1.y-1][p1.x]==GROUND || map[p1.y-1][p1.x]==GRASS)
 				{
-                    map[p1.y][p1.x]=p1.origin;
+					map[p1.y][p1.x]=p1.origin;
                     gaming_print_map(p1.y,p1.x);
                     p1.origin=map[p1.y-1][p1.x];
 					--p1.y;
@@ -393,15 +392,17 @@ void game_start()
 			{
 				while(map[p1.y-1][p1.x]!=BUILDING1)
 				{
-					map[p1.y][p1.x]=PLAYER_P1;
+					bp1.y=p1.y;
+					bp1.x=p1.x;
+					map[bp1.y][bp1.x]=BULLET;
 					//	gaming_print_map(p1.y,p1.x);
-					bp1.origin=map[p1.y-1][p1.x];
+					bp1.origin=map[bp1.y-1][bp1.x];
 
-					--p1.y;
-					map[p1.y][p1.x]=BULLET;
+					--bp1.y;
+					map[bp1.y][bp1.x]=BULLET;
 
 					if(bp1.origin!=GRASS) 
-						gaming_print_map(p1.y,p1.x);
+						gaming_print_map(bp1.y,bp1.x);
 				}
 			}
 			else if(c==BULLET_P1_DOWN)
