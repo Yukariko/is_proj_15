@@ -425,14 +425,16 @@ void game_start()
 
 				if(bp1.vector==BULLET_P1_UP)
 				{
-					--bp1.y;							
-					bp1.origin=map[bp1.y][bp1.x];
+					--bp1.y;	
 					map[bp1.y][bp1.x]=BULLET;
+					if(map[bp1.y][bp1.x]==BUILDING1)
+						map[bp1.y][bp1.x]=bp1.origin;
+					gaming_print_map(bp1.y-1,bp1.x);
 					gaming_print_map(bp1.y,bp1.x);
-					gaming_print_map(bp1.y,bp1.x);
+					
+					
 				}
 			}
-
 		}
 	}
 }
