@@ -29,14 +29,14 @@
 #define PLAYER_P1 20
 #define PLAYER_P2 21
 #define BULLET 13
-#define BULLET_P1_UP 103 //g
-#define BULLET_P1_DOWN 98 //b
-#define BULLET_P1_RIGHT 110 //n
-#define BULLET_P1_LEFT 118 //v
-#define BULLET_P2_UP 105 //i
-#define BULLET_P2_DOWN 107 //k
-#define BULLET_P2_RIGHT 108 //l
-#define BULLET_P2_LEFT 106 //j
+#define BULLET_P1_UP 104 //h
+#define BULLET_P1_DOWN 110 //n
+#define BULLET_P1_RIGHT 109 //m
+#define BULLET_P1_LEFT 98 //b
+#define BULLET_P2_UP 56 //8
+#define BULLET_P2_DOWN 50 //2
+#define BULLET_P2_RIGHT 54 //6
+#define BULLET_P2_LEFT 52 //4
 
 
 
@@ -98,6 +98,7 @@ int map_select();
 void map_type();
 void print_map(int num);
 const char *get_shape(char code);
+void textcolor(int color);
 
 int main()
 {
@@ -425,7 +426,7 @@ void game_start() //게임 실행
 			else if(c==BULLET_P2_DOWN)
 			{
 				bp2.count = 0;
-				bp2.vector=BULLET_P1_DOWN;
+				bp2.vector=BULLET_P2_DOWN;
 				bp2.on=1;
 				bp2.x = p2.x;
 				bp2.y = p2.y+1;
@@ -629,6 +630,7 @@ void game_start() //게임 실행
 				}
 			}
 		}
+	}
 }
 void print_player()
 {
