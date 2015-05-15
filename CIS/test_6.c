@@ -102,7 +102,7 @@ void textcolor(int color);
 
 int main()
 {
-	//start();
+	start();
 	game_start();
 	end();
 	return 0;
