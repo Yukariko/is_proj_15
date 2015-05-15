@@ -394,9 +394,9 @@ void game_start()
 			{
 				bp1.y=p1.y;
 				bp1.x=p1.x;
-				while(map[p1.y-1][p1.x]== GROUND || map[p1.y-1][p1.x] == GRASS)
+				while(map[bp1.y-1][bp1.x]== GROUND || map[bp1.y-1][bp1.x] == GRASS)
 				{
-					map[p1.y][p1.x]=PLAYER_P1;
+					map[bp1.y][bp1.x]=PLAYER_P1;
 					
 						
 						
