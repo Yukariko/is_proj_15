@@ -29,14 +29,14 @@
 #define PLAYER_P1 20
 #define PLAYER_P2 21
 #define BULLET 13
-#define BULLET_P1_UP 104 //h
-#define BULLET_P1_DOWN 110 //n
-#define BULLET_P1_RIGHT 109 //m
-#define BULLET_P1_LEFT 98 //b
-#define BULLET_P2_UP 56 //8
-#define BULLET_P2_DOWN 50 //2
-#define BULLET_P2_RIGHT 54 //6
-#define BULLET_P2_LEFT 52 //4
+#define BULLET_P1_UP 103 //g
+#define BULLET_P1_DOWN 98 //b
+#define BULLET_P1_RIGHT 110 //n
+#define BULLET_P1_LEFT 118 //v
+#define BULLET_P2_UP 105 //i
+#define BULLET_P2_DOWN 107 //k
+#define BULLET_P2_RIGHT 108 //l
+#define BULLET_P2_LEFT 106 //j
 
 
 
@@ -465,10 +465,10 @@ void game_start() //게임 실행
 					gaming_print_map(bp1.y,bp1.x);
 					gaming_print_map(bp1.y+1,bp1.x);
 					if(map[bp1.y-1][bp1.x]==PLAYER_P2)
-						return 0;
-					else if(map[bp2.y-1][bp2.x]==PLAYER_P1) 
-						return 0;
-					else if(map[bp1.y-1][bp1.x]==BUILDING1)
+						break;
+					if(map[bp2.y-1][bp2.x]==PLAYER_P1) 
+						break;
+					if(map[bp1.y-1][bp1.x]==BUILDING1)
 					{
 						bp1.on=0;
 						map[bp1.y][bp1.x]=bp1.origin;
@@ -485,10 +485,10 @@ void game_start() //게임 실행
 					gaming_print_map(bp1.y,bp1.x);
 					gaming_print_map(bp1.y-1,bp1.x);
 					if(map[bp1.y+1][bp1.x]==PLAYER_P2) 
-						return 0;
-					else if(map[bp2.y+1][bp2.x]==PLAYER_P1) 
-						return 0;
-					esle if(map[bp1.y+1][bp1.x]==BUILDING1)
+						break;
+					if(map[bp2.y+1][bp2.x]==PLAYER_P1) 
+						break;
+					if(map[bp1.y+1][bp1.x]==BUILDING1)
 					{
 						bp1.on=0;
 						map[bp1.y][bp1.x]=bp1.origin;
@@ -505,10 +505,10 @@ void game_start() //게임 실행
 					gaming_print_map(bp1.y,bp1.x);
 					gaming_print_map(bp1.y,bp1.x+1);
 					if(map[bp1.y][bp1.x-1]==PLAYER_P2) 
-						return 0;
-					else if(map[bp2.y][bp2.x-1]==PLAYER_P1) 
-						return 0;
-					else if(map[bp1.y][bp1.x-1]==BUILDING1)
+						break;
+					if(map[bp2.y][bp2.x-1]==PLAYER_P1) 
+						break;
+					if(map[bp1.y][bp1.x-1]==BUILDING1)
 					{
 						bp1.on=0;
 						map[bp1.y][bp1.x]=bp1.origin;
@@ -525,10 +525,10 @@ void game_start() //게임 실행
 					gaming_print_map(bp1.y,bp1.x-1);
 					gaming_print_map(bp1.y,bp1.x);
 					if(map[bp1.y][bp1.x+1]==PLAYER_P2) 
-						return 0;
-					else if(map[bp2.y][bp2.x+1]==PLAYER_P1) 
-						return 0;
-					else if(map[bp1.y][bp1.x+1]==BUILDING1)
+						break;
+					if(map[bp2.y][bp2.x+1]==PLAYER_P1) 
+						break;
+					if(map[bp1.y][bp1.x+1]==BUILDING1)
 					{
 						bp1.on=0;
 						map[bp1.y][bp1.x]=bp1.origin;
@@ -546,85 +546,89 @@ void game_start() //게임 실행
 			if(bp2.count==500)
 			{
 				bp2.count = 0;
-			
-			if(bp2.vector==BULLET_P2_UP)
-			{
-				bp2.origin=map[bp2.y-1][bp2.x];
-				--bp2.y;							
 
-				map[bp2.y][bp2.x]=BULLET;
-				map[bp2.y+1][bp2.x]=bp2.origin;
-				gaming_print_map(bp2.y,bp2.x);
-				gaming_print_map(bp2.y+1,bp2.x);
-				if(map[bp2.y-1][bp2.x]==PLAYER_P1) 
-					return 0;
-				else if(map[bp1.y-1][bp1.x]==PLAYER_P2) 
-					return 0;
-				else if(map[bp2.y-1][bp2.x]==BUILDING1)
+				if(bp2.vector==BULLET_P2_UP)
 				{
-					bp2.on=0;
-					map[bp2.y][bp2.x]=bp2.origin;
+					bp2.origin=map[bp2.y-1][bp2.x];
+					--bp2.y;							
+
+					map[bp2.y][bp2.x]=BULLET;
+					map[bp2.y+1][bp2.x]=bp2.origin;
 					gaming_print_map(bp2.y,bp2.x);
+					gaming_print_map(bp2.y+1,bp2.x);
+					if(map[bp2.y-1][bp2.x]==PLAYER_P1) 
+						break;
+					else if(map[bp1.y-1][bp1.x]==PLAYER_P2) 
+						break;
+					else if(map[bp2.y-1][bp2.x]==BUILDING1)
+					{
+						bp2.on=0;
+						map[bp2.y][bp2.x]=bp2.origin;
+						gaming_print_map(bp2.y,bp2.x);
+					}
 				}
-			}
-			else if(bp2.vector==BULLET_P2_DOWN)
-			{
-				bp2.origin=map[bp2.y+1][bp2.x];
-				++bp2.y;							
-
-				map[bp2.y][bp2.x]=BULLET;
-				map[bp2.y-1][bp2.x]=bp2.origin;
-				gaming_print_map(bp2.y,bp2.x);
-				gaming_print_map(bp2.y-1,bp2.x);
-				if(map[bp2.y+1][bp2.x]==PLAYER_P1) 
-					return 0;
-				else if(map[bp1.y+1][bp1.x]==PLAYER_P2) 
-					return 0;
-				esle if(map[bp2.y+1][bp2.x]==BUILDING1)
+				else if(bp2.vector==BULLET_P2_DOWN)
 				{
-					bp2.on=0;
-					map[bp2.y][bp2.x]=bp2.origin;
+					bp2.origin=map[bp2.y+1][bp2.x];
+					++bp2.y;							
+
+					map[bp2.y][bp2.x]=BULLET;
+					map[bp2.y-1][bp2.x]=bp2.origin;
 					gaming_print_map(bp2.y,bp2.x);
+					gaming_print_map(bp2.y-1,bp2.x);
+					if(map[bp2.y+1][bp2.x]==PLAYER_P1) 
+						break;
+					else if(map[bp1.y+1][bp1.x]==PLAYER_P2) 
+						break;
+					else if(map[bp2.y+1][bp2.x]==BUILDING1)
+					{
+						bp2.on=0;
+						map[bp2.y][bp2.x]=bp2.origin;
+						gaming_print_map(bp2.y,bp2.x);
+					}
+
 				}
-
-			}
-			else if(bp2.vector==BULLET_P2_LEFT)
-			{
-				bp2.origin=map[bp2.y][bp2.x-1];
-				--bp2.x;	
-				map[bp2.y][bp2.x]=BULLET;
-				map[bp2.y][bp2.x+1]=bp2.origin;
-				gaming_print_map(bp2.y,bp2.x);
-				gaming_print_map(bp2.y,bp2.x+1);
-				if(map[bp2.y][bp2.x-1]==PLAYER_P1) return 0;
-				else if(map[bp1.y][bp1.x-1]==PLAYER_P2) return 0;
-				else if(map[bp2.y][bp2.x-1]==BUILDING1)
+				else if(bp2.vector==BULLET_P2_LEFT)
 				{
-					bp2.on=0;
-					map[bp2.y][bp2.x]=bp2.origin;
+					bp2.origin=map[bp2.y][bp2.x-1];
+					--bp2.x;	
+					map[bp2.y][bp2.x]=BULLET;
+					map[bp2.y][bp2.x+1]=bp2.origin;
 					gaming_print_map(bp2.y,bp2.x);
+					gaming_print_map(bp2.y,bp2.x+1);
+					if(map[bp2.y][bp2.x-1]==PLAYER_P1) 
+						break;
+					else if(map[bp1.y][bp1.x-1]==PLAYER_P2) 
+						break;
+					else if(map[bp2.y][bp2.x-1]==BUILDING1)
+					{
+						bp2.on=0;
+						map[bp2.y][bp2.x]=bp2.origin;
+						gaming_print_map(bp2.y,bp2.x);
+					}
 				}
-			}
-			else if(bp2.vector==BULLET_P2_RIGHT)
-			{
-				bp2.origin=map[bp2.y][bp2.x+1];
-				++bp2.x;							
-
-				map[bp2.y][bp2.x]=BULLET;
-				map[bp2.y][bp2.x-1]=bp2.origin;
-				gaming_print_map(bp2.y,bp2.x-1);
-				gaming_print_map(bp2.y,bp2.x);
-				if(map[bp2.y][bp2.x+1]==PLAYER_P1) return 0;
-				else if(map[bp1.y][bp1.x+1]==PLAYER_P2) return 0;
-				else if(map[bp2.y][bp2.x+1]==BUILDING1)
+				else if(bp2.vector==BULLET_P2_RIGHT)
 				{
-					bp2.on=0;
-					map[bp2.y][bp2.x]=bp2.origin;
+					bp2.origin=map[bp2.y][bp2.x+1];
+					++bp2.x;							
+
+					map[bp2.y][bp2.x]=BULLET;
+					map[bp2.y][bp2.x-1]=bp2.origin;
+					gaming_print_map(bp2.y,bp2.x-1);
 					gaming_print_map(bp2.y,bp2.x);
+					if(map[bp2.y][bp2.x+1]==PLAYER_P1) 
+						break;
+					else if(map[bp1.y][bp1.x+1]==PLAYER_P2)
+						break;
+					else if(map[bp2.y][bp2.x+1]==BUILDING1)
+					{
+						bp2.on=0;
+						map[bp2.y][bp2.x]=bp2.origin;
+						gaming_print_map(bp2.y,bp2.x);
+					}
 				}
 			}
 		}
-	}
 }
 void print_player()
 {
@@ -1323,7 +1327,6 @@ void start()
 
 	}
 }
-
 void gotoxy(int x, int y)
 {
 	COORD Pos = { x-1, y-1 };
@@ -1333,4 +1336,3 @@ void textcolor(int color)
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
-							
