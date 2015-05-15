@@ -29,16 +29,14 @@
 #define PLAYER_P1 20
 #define PLAYER_P2 21
 #define BULLET 13
-#define BULLET_P1 14
-#define BULLET_P2 15
-#define BULLET_P1_UP 104
-#define BULLET_P1_DOWN 110
-#define BULLET_P1_RIGHT 109
-#define BULLET_P1_LEFT 98
-#define BULLET_P2_UP 56
-#define BULLET_P2_DOWN 50
-#define BULLET_P2_RIGHT 54
-#define BULLET_P2_LEFT 52
+#define BULLET_P1_UP 104 //h
+#define BULLET_P1_DOWN 110 //n
+#define BULLET_P1_RIGHT 109 //m
+#define BULLET_P1_LEFT 98 //b
+#define BULLET_P2_UP 56 //8
+#define BULLET_P2_DOWN 50 //2
+#define BULLET_P2_RIGHT 54 //6
+#define BULLET_P2_LEFT 52 //4
 
 
 
@@ -77,8 +75,11 @@ struct player
 //ÃÑ¾Ë ÀÔ·ÂÅ° ¼±ÅÃ 
 struct bullet  //ÃÑ¾Ë
 {
-	char gps;
-
+	char origin;
+	int x,y;
+	int speed;
+	int vector;
+	int count;
 };
 
 struct player p1,p2;
@@ -123,6 +124,8 @@ void init()
 	p2.y=1;
 	p1.origin=GROUND;
     p2.origin=GROUND; 
+	bp1.origin=GROUND;
+	bp2.origin=GROUND;
 }
 
 void map_type() //?? ????
@@ -330,7 +333,7 @@ void game_start()
 				}
 				
 			}
-			if(c==P2_UP)
+			else if(c==P2_UP)
 			{
 				if(map[p2.y-1][p2.x]==GROUND || map[p2.y-1][p2.x]==GRASS)
 				{
@@ -369,7 +372,7 @@ void game_start()
 					map[p2.y][p2.x]=PLAYER_P2;
 					if(p2.origin!=GRASS) gaming_print_map(p2.y,p2.x);
 				}
-				
+
 			}
 			else if(c==P2_LEFT)
 			{
@@ -377,44 +380,83 @@ void game_start()
 				{
 					map[p2.y][p2.x]=p2.origin;
 					gaming_print_map(p2.y,p2.x);
-                    p2.origin=map[p2.y][p2.x-1];
+					p2.origin=map[p2.y][p2.x-1];
 					--p2.x;
 					map[p2.y][p2.x]=PLAYER_P2;
 					if(p2.origin!=GRASS) gaming_print_map(p2.y,p2.x);
 				}
-				
+
 			}
-		}
-		if (kbhit())
-		{
-			c=getch();
-			if(c==BULLET_P1_UP)
+
+			else if(c==BULLET_P1_UP)
 			{
-				while(map[p1.y-1][p1.x]!=BUILDING1)
-				{
-					bp1.gps=map[p1.y][p1.x];
-					gaming_print_map(p1.y,p1.x);
-					bp1.gps=map[p1.y-1][p1.x];
-					--p1.y;
-					map[p1.y][p1.x]=BULLET_P1;
-					if(bp1.gps!=GRASS) 
-					{
-						gotoxy(get_x(p1.x),get_y(p1.y) );
-						printf("%s",get_shape(BULLET));
-					}
-				}
+				
 			}
 			else if(c==BULLET_P1_DOWN)
 			{
-				
+				bp1.y=p1.y;
+				bp1.x=p1.x;
+				while(map[bp1.y+1][bp1.x]== GROUND || map[bp1.y+1][bp1.x] == GRASS)
+				{
+					map[bp1.y][bp1.x]=map[p1.y][p1.x];
+					gaming_print_map(bp1.y,bp1.x);
+					bp1.origin=map[bp1.y+1][bp1.x];
+					++bp1.y;
+
+					map[bp1.y-1][bp1.x]=bp1.origin;
+					map[bp1.y][bp1.x]=BULLET;
+					if(bp1.origin!=GRASS) 
+						gaming_print_map(bp1.y,bp1.x);
+
+				}
+				if(map[bp1.y+1][bp1.x]==BUILDING1)
+					map[bp1.y][bp1.x]=GROUND;
+				if(bp1.origin!=GRASS) 
+							gaming_print_map(bp1.y,bp1.x);
 			}
 			else if(c==BULLET_P1_LEFT)
 			{
-				
+				bp1.y=p1.y;
+				bp1.x=p1.x;
+				while(map[bp1.y][bp1.x-1]== GROUND || map[bp1.y][bp1.x-1] == GRASS)
+				{
+					map[bp1.y][bp1.x]=map[p1.y][p1.x];
+					gaming_print_map(bp1.y,bp1.x);
+					bp1.origin=map[bp1.y][bp1.x-1];
+					--bp1.x;
+
+					map[bp1.y][bp1.x+1]=bp1.origin;
+					map[bp1.y][bp1.x]=BULLET;
+					if(bp1.origin!=GRASS) 
+						gaming_print_map(bp1.y,bp1.x);
+
+				}
+				if(map[bp1.y][bp1.x-1]==BUILDING1)
+					map[bp1.y][bp1.x]=GROUND;
+				if(bp1.origin!=GRASS) 
+					gaming_print_map(bp1.y,bp1.x);
 			}
 			else if(c==BULLET_P1_RIGHT)
 			{
-				
+				bp1.y=p1.y;
+				bp1.x=p1.x;
+				while(map[bp1.y][bp1.x+1]== GROUND || map[bp1.y][bp1.x+1] == GRASS)
+				{
+					map[bp1.y][bp1.x]=map[p1.y][p1.x];
+					gaming_print_map(bp1.y,bp1.x);
+					bp1.origin=map[bp1.y][bp1.x+1];
+					++bp1.x;
+
+					map[bp1.y][bp1.x-1]=bp1.origin;
+					map[bp1.y][bp1.x]=BULLET;
+					if(bp1.origin!=GRASS) 
+						gaming_print_map(bp1.y,bp1.x);
+
+				}
+				if(map[bp1.y][bp1.x+1]==BUILDING1)
+					map[bp1.y][bp1.x]=GROUND;
+				if(bp1.origin!=GRASS) 
+					gaming_print_map(bp1.y,bp1.x);
 			}
 		}
 	}
