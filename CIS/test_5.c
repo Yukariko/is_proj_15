@@ -68,7 +68,6 @@ struct player
 {
 	char origin;
 	int bullet_count;
-	int heart;
 	int x,y;
 };
 //총알 구조체(원래위치,이동,스피드,)한발씩 
@@ -118,8 +117,6 @@ int get_y(int y)
 }
 void init()
 {
-	p1.heart=5;
-	p2.heart=5;
 	p1.x=2;
 	p1.y=14;
 	p2.x=22;
