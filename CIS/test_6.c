@@ -245,7 +245,7 @@ void print_map(int num) //맵 출력
 			fscanf(fp,"%d",&map[i][j]);
 	fclose(fp);
 
-	system("cls");					//게임 시작전 화면 초기화 
+	system("cls");//게임 시작전 화면 초기화 
 
 	for(int i=0;i<SERO;i++)
 	{
@@ -258,20 +258,18 @@ void print_map(int num) //맵 출력
 
 void game_start() //게임 실행
 {
-	system("cls");					//게임 시작전 화면 초기화 
+	system("cls");//게임 시작전 화면 초기화 
 
 	char c;
 
 	init();
 
-	print_map(map_select());  //현준이 메뉴이동을 리턴값으로 수정 요망  
+	print_map(map_select()); 
 
 	while(1) //개임 시작중  
 	{
 		if (kbhit()) 
 		{   //키 받기 
-			//gotoxy(get_x(p1.x),get_y(p1.y));
-			//printf("%s",get_shape(GROUND));
 
 			c=getch();
 			if(c==P1_UP) 
@@ -285,8 +283,6 @@ void game_start() //게임 실행
 					map[p1.y][p1.x]=PLAYER_P1;
 					if(p1.origin!=GRASS) gaming_print_map(p1.y,p1.x);
 				}
-
-
 			}
 			else if(c==P1_DOWN)
 			{
