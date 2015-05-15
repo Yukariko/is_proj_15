@@ -450,7 +450,7 @@ void game_start() //게임 실행
 		if(bp1.on == 1 )
 		{
 			bp1.count++;
-			if(bp1.count==2000)
+			if(bp1.count==100)
 			{
 				bp1.count = 0;
 				if(bp1.vector==BULLET_P1_UP)
@@ -467,9 +467,9 @@ void game_start() //게임 실행
 						gaming_print_map(bp1.y+1,bp1.x);
 						if(map[bp1.y-1][bp1.x]==PLAYER_P2)
 							end();
-						if(map[bp2.y-1][bp2.x]==PLAYER_P1) 
+						else if(map[bp2.y-1][bp2.x]==PLAYER_P1) 
 							end();
-						if(map[bp1.y-1][bp1.x]==BUILDING1)
+						else if(map[bp1.y-1][bp1.x]==BUILDING1)
 						{
 							bp1.on=0;
 							map[bp1.y][bp1.x]=bp1.origin;
@@ -491,9 +491,9 @@ void game_start() //게임 실행
 						gaming_print_map(bp1.y-1,bp1.x);
 						if(map[bp1.y+1][bp1.x]==PLAYER_P2) 
 							end();
-						if(map[bp2.y+1][bp2.x]==PLAYER_P1) 
+						else if(map[bp2.y+1][bp2.x]==PLAYER_P1) 
 							end();
-						if(map[bp1.y+1][bp1.x]==BUILDING1)
+						else if(map[bp1.y+1][bp1.x]==BUILDING1)
 						{
 							bp1.on=0;
 							map[bp1.y][bp1.x]=bp1.origin;
@@ -510,16 +510,15 @@ void game_start() //게임 실행
 					{
 						bp1.origin=map[bp1.y][bp1.x-1];
 						--bp1.x;							
-	
 						map[bp1.y][bp1.x]=BULLET;
 						map[bp1.y][bp1.x+1]=bp1.origin;
 						gaming_print_map(bp1.y,bp1.x);
 						gaming_print_map(bp1.y,bp1.x+1);
 						if(map[bp1.y][bp1.x-1]==PLAYER_P2)
 							end();
-						if(map[bp2.y][bp2.x-1]==PLAYER_P1) 
+						else if(map[bp2.y][bp2.x-1]==PLAYER_P1) 
 							end();
-						if(map[bp1.y][bp1.x-1]==BUILDING1)
+						else if(map[bp1.y][bp1.x-1]==BUILDING1)
 						{
 							bp1.on=0;
 							map[bp1.y][bp1.x]=bp1.origin;
@@ -561,7 +560,7 @@ void game_start() //게임 실행
 		else if(bp2.on == 1) 
 		{
 			bp2.count++;
-			if(bp2.count==2000)
+			if(bp2.count==100)
 			{
 				bp2.count = 0;
 
@@ -626,7 +625,6 @@ void game_start() //게임 실행
 						--bp2.x;	
 						map[bp2.y][bp2.x]=BULLET;
 						map[bp2.y][bp2.x+1]=bp2.origin;
-						
 						gaming_print_map(bp2.y,bp2.x+1);
 						gaming_print_map(bp2.y,bp2.x);
 						if(map[bp2.y][bp2.x-1]==PLAYER_P1) 
